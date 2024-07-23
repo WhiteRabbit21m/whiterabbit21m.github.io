@@ -18,32 +18,15 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
   <h2 id="A">A</h2>
   
   <dl>
-    <dt>Address</dt>
-    <dd>Una stringa alfanumerica che rappresenta una possibile destinazione per un pagamento Bitcoin.</dd>
 
-    <dt>ASIC</dt>
-    <dd>Application-Specific Integrated Circuit. Un chip specializzato progettato specificamente per il mining di Bitcoin.</dd>
   </dl>
 
   <h2 id="B">B</h2>
   
   <dl>
-    <dt>Block</dt>
-    <dd>Un raggruppamento di transazioni Bitcoin, marcato temporalmente e legato al blocco precedente.</dd>
-
-    <dt>Blockchain</dt>
-    <dd>Il registro pubblico distribuito che contiene la storia di tutte le transazioni Bitcoin.</dd>
-  </dl>
-
-  <dl>
     <dt>Bitcoin</dt>
-    <dd>Bitcoin (BTC) è una valuta digitale decentralizzata creata da una persona o un gruppo sconosciuto che utilizza lo pseudonimo Satoshi Nakamoto. Il whitepaper di Bitcoin è stato pubblicato il 31 ottobre 2008 e la rete ha iniziato a operare con il blocco genesi il 3 gennaio 2009.
-Bitcoin utilizza firme crittografiche per verificare la proprietà delle monete e un algoritmo chiamato Proof-of-Work (PoW) per far rispettare le regole di consenso su tutti i nodi e per proteggere la rete dagli attacchi.
-Ha una fornitura finita di 21 milioni di monete, rendendolo un asset digitale scarso spesso paragonato all'oro. Bitcoin ha guadagnato popolarità per il suo potenziale come riserva di valore, mezzo di scambio e copertura contro l'inflazione.
-Il termine Bitcoin denota anche la rete Bitcoin e la quantità di 100.000.000 della sua unità divisibile più piccola chiamata satoshi, o sat.</dd>
+    <dd>Bitcoin (BTC) è una valuta digitale decentralizzata creata da una persona o un gruppo sconosciuto che utilizza lo pseudonimo Satoshi Nakamoto. Il whitepaper di Bitcoin è stato pubblicato il 31 ottobre 2008 e la rete ha iniziato a operare con il blocco genesi il 3 gennaio 2009. Bitcoin utilizza firme crittografiche per verificare la proprietà delle monete e un algoritmo chiamato Proof-of-Work (PoW) per far rispettare le regole di consenso su tutti i nodi e per proteggere la rete dagli attacchi. Ha una fornitura finita di 21 milioni di monete, rendendolo un asset digitale scarso spesso paragonato all'oro. Bitcoin ha guadagnato popolarità per il suo potenziale come riserva di valore, mezzo di scambio e copertura contro l'inflazione. Il termine Bitcoin denota anche la rete Bitcoin e la quantità di 100.000.000 della sua unità divisibile più piccola chiamata satoshi, o sat.</dd>
 
-    <dt>Blockchain</dt>
-    <dd>Il registro pubblico distribuito che contiene la storia di tutte le transazioni Bitcoin.</dd>
   </dl>
 
 </div>
