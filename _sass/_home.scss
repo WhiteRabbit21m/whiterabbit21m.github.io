@@ -117,11 +117,11 @@ $smartphone-color: #333333;
 
           .screenshot {
             position: absolute;
-            top: 5%; // Ridotto da 20px a 5%
-            left: 5%; // Modificato da 10px a 5%
-            right: 5%; // Modificato da 10px a 5%
-            bottom: 10%; // Modificato da 60px a 5%
-            background-size: contain; // Cambiato da 'cover' a 'contain'
+            top: 25px; // Ridotto da 20px a 5%
+            left: 2px; // Modificato da 10px a 5%
+            right: 2px; // Modificato da 10px a 5%
+            bottom: 55px; // Modificato da 60px a 5%
+            background-size: cover; // Cambiato da 'cover' a 'contain'
             background-repeat: no-repeat;
             background-position: center;
             border-radius: 2px;
