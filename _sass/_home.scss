@@ -147,6 +147,13 @@ $smartphone-color: #333333;
         width: 100%; // Assicura che l'immagine si adatti ai contenitori più piccoli
         height: auto; // Mantiene le proporzioni
         margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 
+          0 0 30px rgba(255, 255, 255, 0.2),  // Glow esterno ampio
+          0 0 10px rgba(255, 255, 255, 0.2),  // Glow medio
+          0 0 5px rgba(255, 255, 255, 0.3);   // Glow interno più intenso
+        background-color: rgba(255, 255, 255, 0.08);
+        padding: 15px;
       }
 
       p {
