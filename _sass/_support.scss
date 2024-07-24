@@ -1,8 +1,9 @@
-// Assicurati che queste variabili siano definite nel tuo file principale di variabili o aggiungile qui
+// Variables
 $accent-color: #4CAF50;
 $text-color: #ffffff;
 $card-bg-color: #1E1E1E;
 
+// Styles
 .support-page {
   max-width: 800px;
   margin: 0 auto;
@@ -31,12 +32,12 @@ $card-bg-color: #1E1E1E;
   padding: 25px;
   width: 100%;
   max-width: 400px;
-  margin: 0 auto 40px;
+  margin: 0 0 40px; // Aligned to the left
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btcpay-logo {
-  text-align: center;
+  text-align: left; // Aligned to the left
   margin-bottom: 20px;
 
   img {
