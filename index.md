@@ -22,7 +22,6 @@ opensource_list:
 This is a Lightning Wallet into a Telegram Bot, but more functionalities have been added:
 
 - /casback command to show a code to get a CashBack from a shop owner
-- Notifications of Cards activations
 - Integrated full POS service
 - POS Link generation for executing POS on an external device
 - Scrub service for forwarding all incoming payments to an external address, making the POS actually not custodial if activated
