@@ -7,6 +7,16 @@ permalink: /support/
 You can send an arbitrary amount of sats to [whiterabbit21m@21m.tips][21mtips] or one of
 my other lightning addresses.
 
+<div class="lightning-info">
+  <h2>Cos'è un Lightning Address?</h2>
+  <p>Un <a href="https://lightningaddress.com/">Lightning Address</a> ti permette di ricevere pagamenti in bitcoin utilizzando un formato simile a un indirizzo email. Prova tu stesso iscrivendoti a <a href="https://stacker.news/r/whiterabbit21m">Stacker News</a> o utilizzando uno di questi bot Telegram: <a href="https://t.me/VentunoTipBot">VentunoTipBot</a>, <a href="https://t.me/SatsMobiBot">SatsMobiBot</a>.</p>
+  <p>I miei indirizzi lightning:</p>
+  <ul>
+    <li><a href="lightning:whiterabbit21m@21m.tips">whiterabbit21m@21m.tips</a></li>
+    <li><a href="lightning:whiterabbit21m@sats.mobi">whiterabbit21m@sats.mobi</a></li>
+  </ul>
+</div>
+
 <div class="btcpay-container">
   <div class="btcpay-logo">
     <img src="/assets/images/btcpay-logo.svg" alt="BTCPay Server Logo">
@@ -25,15 +35,6 @@ my other lightning addresses.
   </form>
 </div>
 
-<div class="lightning-info">
-  <h2>Cos'è un Lightning Address?</h2>
-  <p>Un <a href="https://lightningaddress.com/">Lightning Address</a> ti permette di ricevere pagamenti in bitcoin utilizzando un formato simile a un indirizzo email. Prova tu stesso iscrivendoti a <a href="https://stacker.news/r/whiterabbit21m">Stacker News</a> o utilizzando uno di questi bot Telegram: <a href="https://t.me/VentunoTipBot">VentunoTipBot</a>, <a href="https://t.me/SatsMobiBot">SatsMobiBot</a>.</p>
-  <p>I miei indirizzi lightning:</p>
-  <ul>
-    <li><a href="lightning:whiterabbit21m@21m.tips">whiterabbit21m@21m.tips</a></li>
-    <li><a href="lightning:whiterabbit21m@sats.mobi">whiterabbit21m@sats.mobi</a></li>
-  </ul>
-</div>
 
 [21mtips]: lightning:whiterabbit21m@21m.tips
 [satsmobi]: lightning:whiterabbit21m@sats.mobi
