@@ -40,20 +40,21 @@ $smartphone-color: #333333;
     // Unified Wallet Info Section
     .wallet-info-unified {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      justify-content: space-around;
+      align-items: center;
       width: 100%;
       max-width: 1200px;
       margin-bottom: 60px;
+      padding: 0 40px;
 
-      .qr-code-section, .info-text, .smartphone-container {
-        flex: 1;
-        margin: 0 20px;
+      .qr-code-section, .smartphone-container {
+        flex: 0 1 auto;
       }
 
       // QR Code Section
       .qr-code-section {
         text-align: center;
+        max-width: 45%; // Aumentato leggermente
 
         h2 {
           color: $accent-color;
@@ -61,16 +62,10 @@ $smartphone-color: #333333;
         }
 
         img {
-          max-width: 100%;
+          max-width: 80%; // Aumentato da 70% a 80%
           height: auto;
-          margin-bottom: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          box-shadow: 
-            0 0 30px rgba(255, 255, 255, 0.2),
-            0 0 10px rgba(255, 255, 255, 0.2),
-            0 0 5px rgba(255, 255, 255, 0.3);
-          background-color: rgba(255, 255, 255, 0.08);
-          padding: 15px;
+          margin: 0 auto 20px;
+          // Rimosso il padding e il background-color
         }
 
         p {
@@ -78,47 +73,15 @@ $smartphone-color: #333333;
         }
       }
 
-      // Info Text Section
-      .info-text {
-        h2 {
-          color: $accent-color;
-          margin-bottom: 20px;
-        }
-
-        p, ul {
-          color: rgba($text-color-light, 0.9);
-          margin-bottom: 20px;
-        }
-
-        ul {
-          padding-left: 20px;
-        }
-
-        .cta-button {
-          display: inline-block;
-          background-color: $accent-color;
-          color: $text-color-light;
-          padding: 15px 30px;
-          border-radius: 5px;
-          text-decoration: none;
-          font-weight: bold;
-          transition: background-color 0.3s ease;
-
-          &:hover {
-            background-color: darken($accent-color, 10%);
-          }
-        }
-      }
-
       // Smartphone Container
       .smartphone-container {
-        max-width: 300px;
+        width: 300px;
+        height: 600px;
 
         .smartphone {
           position: relative;
           width: 100%;
-          height: 0;
-          padding-bottom: 200%;
+          height: 100%;
           background-color: $smartphone-color;
           border-radius: 30px;
           box-shadow: 0 0 0 10px lighten($smartphone-color, 10%),
@@ -162,6 +125,46 @@ $smartphone-color: #333333;
             background-position: center;
             border-radius: 2px;
           }
+        }
+      }
+    }
+
+    // Wallet Info Text Section
+    .wallet-info {
+      background-color: $card-bg-color;
+      padding: 40px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 1200px;
+      box-sizing: border-box;
+      margin-bottom: 60px;
+
+      h2 {
+        color: $accent-color;
+        margin-bottom: 20px;
+      }
+
+      p, ul {
+        color: rgba($text-color-light, 0.9);
+        margin-bottom: 20px;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: $accent-color;
+        color: $text-color-light;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: darken($accent-color, 10%);
         }
       }
     }
@@ -214,12 +217,27 @@ $smartphone-color: #333333;
       .wallet-info-unified {
         flex-direction: column;
         align-items: center;
+        padding: 0 20px;
 
-        .qr-code-section, .info-text, .smartphone-container {
+        .qr-code-section, .smartphone-container {
           width: 100%;
           max-width: 500px;
           margin: 0 0 40px 0;
         }
+
+        .qr-code-section img {
+          max-width: 70%; // Aumentato da 60% a 70%
+        }
+
+        .smartphone-container {
+          height: 500px;
+        }
+      }
+
+      .wallet-info, .open-source {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
       }
     }
   }
@@ -242,9 +260,13 @@ $smartphone-color: #333333;
         .smartphone-container {
           display: none; // Nasconde il container smartphone su schermi molto piccoli
         }
+
+        .qr-code-section img {
+          max-width: 80%; // Aumentato ulteriormente per schermi molto piccoli
+        }
       }
 
-      .open-source {
+      .wallet-info, .open-source {
         padding: 30px;
       }
     }
