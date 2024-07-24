@@ -1,43 +1,41 @@
 ---
 layout: default
 ---
-
 <div class="home-container">
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1>{{ page.title | default: "Lightning Network Wallet" }}</h1>
-      <p>{{ page.subtitle | default: "Il tuo wallet Lightning Network preferito" }}</p>
+      <h1>{{ page.title }}</h1>
+      <p>{{ page.subtitle }}</p>
     </div>
   </section>
-
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Wallet Info Section -->
-    <section class="wallet-info">
-      <div class="info-text">
-        <h2>{{ page.wallet_title | default: "Il Nostro Wallet Lightning" }}</h2>
-        {{ content }}
-        <a href="{{ page.cta_link | default: '#' }}" class="cta-button">{{ page.cta_text | default: "Visita il Sito del Wallet" }}</a>
+    <!-- Unified Wallet Info Section -->
+    <section class="wallet-info-unified">
+      <!-- QR Code Section -->
+      <div class="qr-code-section">
+        <h2>{{ page.qr_title }}</h2>
+        <img src="{{ page.qr_image | relative_url }}" alt="QR Code for connection">
+        <p>{{ page.qr_description }}</p>
       </div>
+      <!-- Wallet Info Text -->
+      <div class="info-text">
+        <h2>{{ page.wallet_title }}</h2>
+        {{ content }}
+        <a href="{{ page.cta_link }}" class="cta-button">{{ page.cta_text }}</a>
+      </div>
+      <!-- Smartphone Container -->
       <div class="smartphone-container">
         <div class="smartphone">
-          <div class="screenshot" style="background-image: url('{{ page.wallet_screenshot | default: "/assets/images/wallet-screenshot.png" }}');"></div>
+          <div class="screenshot" style="background-image: url('{{ page.wallet_screenshot | relative_url }}');"></div>
         </div>
       </div>
     </section>
-
-    <!-- QR Code Section -->
-    <section class="qr-code">
-      <h2>{{ page.qr_title | default: "Connettiti al Wallet" }}</h2>
-      <img src="{{ page.qr_image | default: '/assets/images/wallet-qr-code.png' }}" alt="QR Code per la connessione">
-      <p>{{ page.qr_description | default: "Scansiona questo codice QR per connetterti al wallet" }}</p>
-    </section>
-
     <!-- Open Source Software Section -->
     <section class="open-source">
-      <h2>{{ page.opensource_title | default: "Software Open Source" }}</h2>
-      <p>{{ page.opensource_description | default: "Il nostro wallet utilizza il seguente software open source per funzionare:" }}</p>
+      <h2>{{ page.opensource_title }}</h2>
+      <p>{{ page.opensource_description }}</p>
       {% if page.opensource_list %}
         <ul>
           {% for item in page.opensource_list %}
