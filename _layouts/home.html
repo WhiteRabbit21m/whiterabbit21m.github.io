@@ -19,18 +19,18 @@ layout: default
         <img src="{{ page.qr_image | relative_url }}" alt="QR Code for connection">
         <p>{{ page.qr_description }}</p>
       </div>
-      <!-- Wallet Info Text -->
-      <div class="info-text">
-        <h2>{{ page.wallet_title }}</h2>
-        {{ content }}
-        <a href="{{ page.cta_link }}" class="cta-button">{{ page.cta_text }}</a>
-      </div>
       <!-- Smartphone Container -->
       <div class="smartphone-container">
         <div class="smartphone">
           <div class="screenshot" style="background-image: url('{{ page.wallet_screenshot | relative_url }}');"></div>
         </div>
       </div>
+    </section>
+    <!-- Wallet Info Text -->
+    <section class="wallet-info">
+      <h2>{{ page.wallet_title }}</h2>
+      {{ content }}
+      <a href="{{ page.cta_link }}" class="cta-button">{{ page.cta_text }}</a>
     </section>
     <!-- Open Source Software Section -->
     <section class="open-source">
