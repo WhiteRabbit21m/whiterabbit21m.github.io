@@ -14,7 +14,7 @@ my other lightning addresses.
   <form method="POST" action="https://btcpay.whiterabbit21m.com/api/v1/invoices" class="btcpay-form btcpay-form--block">
     <input type="hidden" name="storeId" value="5vHj4TmiyYMCkFUpyBYf6rUDvaJ6YA7B74v2G7iYD9D2" />
     <input type="hidden" name="checkoutDesc" value="Donation" />
-    <input type="hidden" name="browserRedirect" value="https://www.tuosito.com/grazie" />
+    <input type="hidden" name="browserRedirect" value="https://www.whiterabbit21m.org/thank-you" />
     <input type="hidden" name="currency" value="USD" />
     
     <div class="form-group">
