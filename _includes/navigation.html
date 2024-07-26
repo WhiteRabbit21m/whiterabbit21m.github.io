@@ -1,6 +1,5 @@
-<!-- _includes/navigation.html -->
-<div class="nav-wrapper">
-  <button class="menu-toggle" aria-label="Toggle menu">
+<div class="nav-cart-wrapper">
+  <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
     <span></span>
     <span></span>
     <span></span>
@@ -10,7 +9,7 @@
       <li class="nav-item">
         <a href="{{ '/dashboard/' | relative_url }}" class="nav-link {% if page.url == "/dashboard/" %}active{% endif %}">Dashboard</a>
       </li>
-       <li class="nav-item">
+      <li class="nav-item">
         <a href="{{ '/bitcoin-education/' | relative_url }}" class="nav-link {% if page.url == "/bitcoin-education/" %}active{% endif %}">Bitcoin Education</a>
       </li>
       <li class="nav-item">
@@ -18,6 +17,9 @@
       </li>
       <li class="nav-item">
         <a href="{{ '/support/' | relative_url }}" class="nav-link {% if page.url == "/support/" %}active{% endif %}">Support</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ '/shop/' | relative_url }}" class="nav-link {% if page.url == "/shop/" %}active{% endif %}">Shop</a>
       </li>
     </ul>
   </nav>
