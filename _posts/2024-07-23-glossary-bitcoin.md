@@ -117,7 +117,223 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
 
   </dl>
 
+  <h2 id="I">I</h2>
+  
+  <dl>
 
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="J">J</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="K">K</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="L">L</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="M">M</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="N">N</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  
+  <h2 id="O">O</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="P">P</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="Q">Q</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="R">R</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="S">S</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="T">T</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="U">U</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="V">V</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="W">W</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="X">X</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="Y">Y</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  
+<h2 id="Z">Z</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
 
 </div>
 
