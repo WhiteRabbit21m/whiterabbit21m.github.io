@@ -42,6 +42,83 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
 
   </dl>
 
+  <h2 id="C">C</h2>
+  
+  <dl>
+
+    <dt>Checksum</dt>
+    <dd>Un checksum è un modo semplice per rilevare errori o sbagli nei dati. Per quanto riguarda Bitcoin, i checksum vengono calcolati utilizzando una porzione di 32 bit di un hash SHA256 (gli ultimi quattro byte) e sono usati per individuare indirizzi errati, aiutando a prevenire che le transazioni vadano male a causa di semplici errori di battitura. Un checksum usa solo 32 bit perché è più che sufficiente per identificare in modo univoco un indirizzo Bitcoin o una transazione, assicurando al contempo l'efficienza della rete. Il checksumming è il processo di calcolo e conferma rapida dei checksum per convalidare i dati senza richiedere un'elaborazione estesa o il coinvolgimento di terze parti.</dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="D">D</h2>
+  
+  <dl>
+
+    <dt>Diceware</dt>
+    <dd>Diceware è un metodo per generare passphrase, password e altri elementi crittografici, come i seed di Bitcoin, utilizzando dadi comuni. Per creare ogni parola nella passphrase, sono necessari cinque lanci di un dado a sei facce. Ogni numero ottenuto viene assemblato come un numero di cinque cifre, corrispondente a una parola in una lista di parole crittografiche. Ad esempio, se hai ottenuto 1, 3, 4, 2 e 6 per la prima parola, cercheresti la parola "teach" nella lista di parole. In Bitcoin, diceware viene utilizzato per generare il seed di un portafoglio Bitcoin. Un seed di portafoglio Bitcoin è una stringa di 128 o 256 bit che viene utilizzata per creare tutte le chiavi private di un portafoglio Bitcoin. Inoltre, questo seed può essere utilizzato anche per recuperare il portafoglio nel caso in cui le chiavi private vengano smarrite o rubate. Nota bene, ricorda di non condividere mai il tuo seed con nessuno, poiché darebbe loro accesso al tuo portafoglio Bitcoin.</dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="E">E</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="F">F</h2>
+  
+  <dl>
+
+    <dt>Fork</dt>
+    <dd>Un fork in Bitcoin si riferisce a un cambiamento nelle regole del protocollo. Ci sono due tipi principali: Hard fork: Un cambiamento incompatibile con le versioni precedenti, che causa la divisione della blockchain in due se non tutti i nodi si aggiornano. Risulta in una blockchain completamente nuova. Soft fork: Un cambiamento retrocompatibile, il che significa che la nuova catena è ancora compatibile con quella vecchia. I nodi più vecchi vedono le nuove transazioni come valide (ma potrebbero non comprenderle), assicurando una singola catena continua. Questo tipo di fork restringe o aggiunge regole senza ostracizzare i nodi precedenti. Due soft fork importanti in Bitcoin sono stati Segregated Witness (SegWit) nel 2017 e Taproot nel 2021.</dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="G">G</h2>
+  
+  <dl>
+
+    <dt></dt>
+    <dd></dd>
+
+    <dt></dt>
+    <dd></dd>
+
+  </dl>
+
+  <h2 id="H">H</h2>
+  
+  <dl>
+
+    <dt>Hashcash</dt>
+    <dd>Nel 1997, il Dr. Adam Back, CEO di Blockstream, propose Hashcash, un meccanismo di proof-of-work (PoW) destinato a fermare lo spam e gli attacchi di denial-of-service (DoS). Oggi viene utilizzato come base per l'algoritmo di mining di Bitcoin. Nei sistemi di posta elettronica, Hashcash funge da funzione di costo che impone un costo computazionale al mittente, scoraggiando così lo spam e i remailer anonimi. Questo costo computazionale è simile a un "pedaggio" che il mittente deve pagare per assicurare che l'email venga consegnata. L'idea alla base di questo è che gli spammer, che tipicamente inviano grandi volumi di email, sarebbero scoraggiati dal farlo poiché il costo computazionale sarebbe proibitivamente costoso. In Bitcoin, Hashcash viene utilizzato nella creazione di nuovi blocchi richiedendo ai minatori di eseguire una certa quantità di lavoro computazionale prima che il loro blocco possa essere considerato valido. Questo lavoro comporta la ricerca di un valore che, quando viene sottoposto a hash con SHA-256, produce un risultato che soddisfa criteri specifici, come un certo numero di zeri iniziali. Ciò assicura che la creazione di nuovi blocchi richieda un elevato sforzo di calcolo, contribuendo a proteggere la rete decentralizzata e giocando un ruolo critico nella sicurezza della blockchain di Bitcoin.</dd>
+
+    <dt>Hashrate</dt>
+    <dd>Una misura aggregata di quanti hash i minatori di Bitcoin producono al secondo nell'algoritmo di consenso Proof-of-Work. Attualmente, l'hashrate di Bitcoin si misura in exahash al secondo (EH/s), rappresentando la velocità con cui i minatori tentano di trovare un hash valido per un nuovo blocco.</dd>
+
+    <dt>HODLer</dt>
+    <dd>Un errore intenzionale per 'holder' (detentore); una persona che mantiene risparmi a lungo termine in Bitcoin. L'errore ha origine da uno sfogo ubriaco del 2013 dell'utente del forum BitcoinTalk GameKyuubi, intitolato "I AM HODLING" ("STO HODLANDO"), in cui spiega che il trading tipicamente crea perdite e la migliore strategia è non vendere mai.</dd>
+
+  </dl>
+
+
+
 </div>
 
 <script>
