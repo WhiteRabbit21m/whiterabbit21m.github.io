@@ -1,7 +1,6 @@
-// Assicurati che queste variabili siano coerenti con il resto del tuo SCSS
+// Variables (assicurati che siano coerenti con header.scss)
 $text-color: #ffffff;
 $accent-color: #4CAF50;
-$background-color: #121212;
 $card-bg-color: #1E1E1E;
 
 .nav-wrapper {
@@ -10,7 +9,7 @@ $card-bg-color: #1E1E1E;
 }
 
 .menu-toggle {
-  display: none; // Nascosto di default
+  display: none;
 }
 
 .main-nav {
@@ -20,15 +19,12 @@ $card-bg-color: #1E1E1E;
     margin: 0;
     display: flex;
   }
-
   .nav-item {
     margin-left: 1.5rem;
-
     &:first-child {
       margin-left: 0;
     }
   }
-
   .nav-link {
     color: rgba($text-color, 0.8);
     text-decoration: none;
@@ -62,55 +58,51 @@ $card-bg-color: #1E1E1E;
 
 @media (max-width: 768px) {
   .nav-wrapper {
-    justify-content: flex-end; // Spinge il bottone a destra
+    width: auto; // Allow natural width
   }
-
+  
   .menu-toggle {
     display: block;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
     z-index: 1001;
-
+    
     span {
       display: block;
-      width: 25px;
-      height: 3px;
+      width: 20px;
+      height: 2px;
       background-color: $text-color;
-      margin: 5px 0;
+      margin: 4px 0;
       transition: 0.4s;
     }
   }
-
+  
   .main-nav {
     position: fixed;
     top: 0;
-    right: -250px; // Nascosto fuori dallo schermo
+    left: -250px;
     width: 250px;
     height: 100vh;
     background-color: $card-bg-color;
-    transition: right 0.3s ease;
+    transition: left 0.3s ease;
     z-index: 1000;
     
     .nav-list {
       flex-direction: column;
-      padding-top: 60px; // Spazio per il pulsante di toggle
+      padding-top: 60px;
     }
-
     .nav-item {
       margin: 0;
     }
-
     .nav-link {
       display: block;
       padding: 15px 20px;
       border-bottom: 1px solid rgba($text-color, 0.1);
-
       &::after {
         display: none;
       }
-
       &:hover,
       &.active {
         transform: none;
@@ -118,12 +110,11 @@ $card-bg-color: #1E1E1E;
       }
     }
   }
-
+  
   body.menu-open {
     .main-nav {
-      right: 0; // Mostra il menu
+      left: 0;
     }
-
     .menu-toggle {
       span:nth-child(1) {
         transform: rotate(-45deg) translate(-5px, 6px);
@@ -135,35 +126,29 @@ $card-bg-color: #1E1E1E;
         transform: rotate(45deg) translate(-5px, -6px);
       }
     }
-  }
-
-  // Previeni lo scrolling del body quando il menu è aperto
-  body.menu-open {
     overflow: hidden;
-  }
-
-  // Overlay scuro quando il menu è aperto
-  body.menu-open::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    
+    &::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
   }
 }
 
-// Animazione per il menu mobile
 @keyframes slideIn {
-  from { right: -250px; }
-  to { right: 0; }
+  from { left: -250px; }
+  to { left: 0; }
 }
 
 @keyframes slideOut {
-  from { right: 0; }
-  to { right: -250px; }
+  from { left: 0; }
+  to { left: -250px; }
 }
 
 body.menu-open .main-nav {
