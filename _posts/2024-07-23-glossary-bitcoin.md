@@ -145,8 +145,8 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
   
   <dl>
 
-    <dt></dt>
-    <dd></dd>
+    <dt>Key-value store</dt>
+    <dd>Un key-value store in Bitcoin è un tipo di database semplice ed efficiente utilizzato per memorizzare e recuperare dati utilizzando chiavi uniche per accedere ai valori memorizzati. Memorizza i dati come una collezione di coppie chiave-valore: una chiave, che è un identificatore unico, e un valore, che è il dato associato a quella chiave. Ogni chiave è unica e corrisponde a un valore specifico, permettendo un recupero efficiente, un accesso rapido e una gestione dei dati. Alcuni esempi includono: wallet.dat: Questo file contiene dettagli relativi al portafoglio come chiavi private e indirizzi, chiavi pubbliche e metadati delle chiavi (etichette, seed HD e percorsi di derivazione) e utilizza internamente un archivio chiave-valore. LevelDB: Bitcoin Core utilizza il motore di archiviazione chiave-valore LevelDB come libreria di archiviazione ad alte prestazioni, assicurando che le operazioni di recupero e gestione dei dati siano ottimizzate per le esigenze della rete.</dd>
 
     <dt></dt>
     <dd></dd>
@@ -156,6 +156,33 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
   <h2 id="L">L</h2>
   
   <dl>
+
+    <dt>Lightning implementation</dt>
+    <dd>Un programma software capace di gestire un nodo Lightning e di interagire con la Lightning Network sul backend. Ogni implementazione segue le specifiche BOLT (Basis of Lightning Technology), assicurando compatibilità e interazione senza problemi tra i nodi all'interno della rete. Alcune popolari implementazioni Lightning includono Core Lightning, LND (sviluppato da Lightning Labs) ed Eclair (sviluppato da ACINQ). Mentre possono avere caratteristiche, linguaggi di programmazione o ottimizzazioni diverse, la loro aderenza agli standard BOLT garantisce l'interoperabilità.</dd>
+
+    <dt>Lightning Network (LN)</dt>
+    <dd>Un protocollo decentralizzato di livello 2 costruito su Bitcoin che utilizza una rete peer-to-peer di canali di pagamento per consentire transazioni più economiche, veloci e scalabili. I pagamenti su Lightning vengono aggregati off-chain e poi inviati alla blockchain principale di Bitcoin per il regolamento finale, sfruttando la sicurezza e la decentralizzazione di Bitcoin mentre migliora il throughput delle transazioni e aiuta Bitcoin a scalare globalmente. <Lightning è la soluzione di scalabilità definitiva per Bitcoin. Con un limite stimato di 500 transazioni al secondo (TPS) per canale di pagamento (nelle attuali condizioni di rete), Lightning ha un throughput di oltre 42 milioni di TPS, l'equivalente di blocchi di circa 14,4 TB di dimensione. Questo è più di 1000 volte la capacità di VISA, che può gestire solo fino a 150 milioni di TPS al giorno o un massimo di 24.000 TPS contemporaneamente./dd>
+
+    <dt>Lightning Service Provider (LSP)</dt>
+    <dd>Un Lightning Service Provider, o LSP, è un'entità che facilita vari servizi di liquidità e di rete sulla Lightning Network per utenti e aziende. Gli LSP agiscono come intermediari, in modo simile a come i fornitori di servizi Internet (ISP) offrono l'accesso a Internet. Forniscono vari servizi, come l'apertura di canali, l'instradamento delle transazioni e una migliore connettività, oltre a funzionalità più avanzate come il ribilanciamento dei canali e l'apertura di canali zero-conf. Il loro ruolo principale è migliorare l'esperienza dell'utente gestendo compiti più complessi come lo scambio di fondi on-chain e off-chain e l'adeguamento della posizione dell'utente all'interno della rete. Gli LSP spesso addebitano commissioni per coprire le spese di mining, i costi del capitale e per i loro servizi specializzati. Confrontando un LSP con un altro servizio Lightning, come un LaaS, gli LSP si concentrano specificamente sui servizi di liquidità e di rete, mentre i fornitori di LaaS possono offrire una gamma più ampia di soluzioni infrastrutturali.</dd>
+
+    <dt>Lightning Specification</dt>
+    <dd>La Lightning Specification, nota anche come Basis of Lightning Technology (BOLT), è una raccolta degli sforzi della comunità Bitcoin per specificare e consolidare gli standard tecnici intorno alla Lightning Network, con l'intento di raggiungere la compatibilità delle funzionalità e l'interoperabilità tra le diverse implementazioni. Al momento della stesura, ci sono 11 BOLT, con il molto atteso BOLT12.
+Lista completa dei BOLT attuali:
+
+BOLT #1: Protocollo di Base
+BOLT #2: Protocollo Peer per la Gestione dei Canali
+BOLT #3: Formati di Transazione e Script Bitcoin
+BOLT #4: Protocollo di Routing Onion
+BOLT #5: Raccomandazioni per la Gestione delle Transazioni On-chain
+BOLT #7: Scoperta di Nodi e Canali P2P
+BOLT #8: Trasporto Crittografato e Autenticato
+BOLT #9: Flag di Funzionalità Assegnate
+BOLT #10: Bootstrap DNS e Localizzazione Assistita dei Nodi
+BOLT #11: Protocollo di Fatturazione per Pagamenti Lightning</dd>
+
+    <dt>Lightning-as-a-Service (LaaS)</dt>
+    <dd>Lightning-as-a-Service, o LaaS, è un modello di servizio specializzato in cui fornitori terzi offrono infrastrutture e soluzioni relative alla Lightning Network di Bitcoin a imprese e sviluppatori. Invece di lottare con gli aspetti tecnici della configurazione e gestione di nodi Lightning, canali e liquidità, le aziende possono affidarsi ai fornitori LaaS per gestire queste complessità. Ciò permette ai clienti di incorporare più facilmente le capacità di transazione veloci, sicure ed economiche di Lightning nelle loro piattaforme o applicazioni. Questo può comprendere utilizzi che vanno dal facilitare microtransazioni al alimentare applicazioni decentralizzate. L'utilizzo di un fornitore LaaS riduce l'investimento iniziale, minimizza il rischio, utilizza tecnologia Lightning moderna e include manutenzione del sistema 24/7. Tuttavia, i clienti potrebbero essere vincolati al loro fornitore LaaS per periodi contrattuali estesi poiché non possiedono i sistemi Lightning.</dd>
 
     <dt></dt>
     <dd></dd>
