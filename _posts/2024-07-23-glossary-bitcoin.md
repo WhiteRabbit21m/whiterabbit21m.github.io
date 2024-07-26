@@ -167,19 +167,7 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
     <dd>Un Lightning Service Provider, o LSP, è un'entità che facilita vari servizi di liquidità e di rete sulla Lightning Network per utenti e aziende. Gli LSP agiscono come intermediari, in modo simile a come i fornitori di servizi Internet (ISP) offrono l'accesso a Internet. Forniscono vari servizi, come l'apertura di canali, l'instradamento delle transazioni e una migliore connettività, oltre a funzionalità più avanzate come il ribilanciamento dei canali e l'apertura di canali zero-conf. Il loro ruolo principale è migliorare l'esperienza dell'utente gestendo compiti più complessi come lo scambio di fondi on-chain e off-chain e l'adeguamento della posizione dell'utente all'interno della rete. Gli LSP spesso addebitano commissioni per coprire le spese di mining, i costi del capitale e per i loro servizi specializzati. Confrontando un LSP con un altro servizio Lightning, come un LaaS, gli LSP si concentrano specificamente sui servizi di liquidità e di rete, mentre i fornitori di LaaS possono offrire una gamma più ampia di soluzioni infrastrutturali.</dd>
 
     <dt>Lightning Specification</dt>
-    <dd>La Lightning Specification, nota anche come Basis of Lightning Technology (BOLT), è una raccolta degli sforzi della comunità Bitcoin per specificare e consolidare gli standard tecnici intorno alla Lightning Network, con l'intento di raggiungere la compatibilità delle funzionalità e l'interoperabilità tra le diverse implementazioni. Al momento della stesura, ci sono 11 BOLT, con il molto atteso BOLT12.
-Lista completa dei BOLT attuali:
-
-BOLT #1: Protocollo di Base
-BOLT #2: Protocollo Peer per la Gestione dei Canali
-BOLT #3: Formati di Transazione e Script Bitcoin
-BOLT #4: Protocollo di Routing Onion
-BOLT #5: Raccomandazioni per la Gestione delle Transazioni On-chain
-BOLT #7: Scoperta di Nodi e Canali P2P
-BOLT #8: Trasporto Crittografato e Autenticato
-BOLT #9: Flag di Funzionalità Assegnate
-BOLT #10: Bootstrap DNS e Localizzazione Assistita dei Nodi
-BOLT #11: Protocollo di Fatturazione per Pagamenti Lightning</dd>
+    <dd>La Lightning Specification, nota anche come Basis of Lightning Technology (BOLT), è una raccolta degli sforzi della comunità Bitcoin per specificare e consolidare gli standard tecnici intorno alla Lightning Network, con l'intento di raggiungere la compatibilità delle funzionalità e l'interoperabilità tra le diverse implementazioni. Al momento della stesura, ci sono 11 BOLT, con il molto atteso BOLT12. Lista completa dei BOLT attuali: BOLT #1: Protocollo di Base BOLT #2: Protocollo Peer per la Gestione dei Canali BOLT #3: Formati di Transazione e Script Bitcoin BOLT #4: Protocollo di Routing Onion BOLT #5: Raccomandazioni per la Gestione delle Transazioni On-chain BOLT #7: Scoperta di Nodi e Canali P2P BOLT #8: Trasporto Crittografato e Autenticato BOLT #9: Flag di Funzionalità Assegnate BOLT #10: Bootstrap DNS e Localizzazione Assistita dei Nodi BOLT #11: Protocollo di Fatturazione per Pagamenti Lightning</dd>
 
     <dt>Lightning-as-a-Service (LaaS)</dt>
     <dd>Lightning-as-a-Service, o LaaS, è un modello di servizio specializzato in cui fornitori terzi offrono infrastrutture e soluzioni relative alla Lightning Network di Bitcoin a imprese e sviluppatori. Invece di lottare con gli aspetti tecnici della configurazione e gestione di nodi Lightning, canali e liquidità, le aziende possono affidarsi ai fornitori LaaS per gestire queste complessità. Ciò permette ai clienti di incorporare più facilmente le capacità di transazione veloci, sicure ed economiche di Lightning nelle loro piattaforme o applicazioni. Questo può comprendere utilizzi che vanno dal facilitare microtransazioni al alimentare applicazioni decentralizzate. L'utilizzo di un fornitore LaaS riduce l'investimento iniziale, minimizza il rischio, utilizza tecnologia Lightning moderna e include manutenzione del sistema 24/7. Tuttavia, i clienti potrebbero essere vincolati al loro fornitore LaaS per periodi contrattuali estesi poiché non possiedono i sistemi Lightning.</dd>
@@ -196,8 +184,20 @@ BOLT #11: Protocollo di Fatturazione per Pagamenti Lightning</dd>
   
   <dl>
 
-    <dt></dt>
-    <dd></dd>
+    <dt>Mempool</dt>
+    <dd>Il mempool, o memory pool, è il luogo dove le transazioni Bitcoin attendono prima di essere confermate e registrate in modo immutabile sulla blockchain. Ogni nodo Bitcoin ha il proprio mempool che memorizza queste transazioni in sospeso dopo averne verificato la validità. Questa verifica include il controllo per evitare la doppia spesa e la verifica delle firme crittografiche appropriate. Le transazioni rimangono nel mempool finché un minatore non le seleziona per includerle in un nuovo blocco. La dimensione e il contenuto del mempool variano, influenzati dall'attività della rete, dalle commissioni di transazione e dalle politiche dei nodi. Per esempio, quando invii una transazione Bitcoin, questa entra nei mempool della rete e vi rimane fino a quando non viene inserita in un blocco, momento in cui viene confermata e rimossa dai mempool. Gli utenti possono visualizzare il mempool di Bitcoin in tempo reale utilizzando lo strumento open-source mempool.space, oltre a cercare e visualizzare le transazioni.</dd>
+
+    <dt>Merge conflict</dt>
+    <dd>Un merge conflict nel contesto di Bitcoin si verifica quando due rami hanno apportato modifiche contrastanti allo stesso codice, e il sistema di controllo versione non può determinare automaticamente quale modifica sia corretta. Per esempio, se uno sviluppatore modifica una certa funzione in Bitcoin Core mentre un altro modifica la stessa funzione in una piattaforma sidechain di Bitcoin come Elements (di cui Liquid è un'implementazione). Ciò richiede una revisione manuale per assicurare che il codice finale di Elements sia coerente, funzionale e compatibile con la sua controparte Bitcoin Core. I merge conflict sono comuni in progetti open-source come Bitcoin (e i suoi protocolli di secondo livello) che hanno una rete indipendente e distribuita di sviluppatori. Una buona comunicazione è fondamentale.</dd>
+
+    <dt>Merkle tree</dt>
+    <dd>Un albero di Merkle, noto anche come albero di hash, prende il nome dal suo inventore, Ralph Merkle. È una struttura dati che garantisce l'integrità della verifica dei dati in Bitcoin. La sua struttura ad albero permette ai nodi leggeri di verificare le transazioni senza dover scaricare l'intero blocco, codificando tutte le transazioni in un blocco in un singolo hash, noto come radice di Merkle, che viene poi incluso nell'intestazione del blocco. Ecco un esempio di come potrebbe apparire un albero di Merkle per un blocco con quattro transazioni: Tx0, Tx1, Tx2, Tx3: le singole transazioni incluse in un blocco Bitcoin. Hash0, Hash1, Hash2, Hash3: gli hash delle singole transazioni. Hash 01: l'hash della concatenazione di Hash0 e Hash1. Hash 23: l'hash della concatenazione di Hash2 e Hash3. Radice di Merkle: Questo è l'hash della concatenazione di Hash 01 e Hash 23 incorporato nell'intestazione del blocco. Se qualcuno vuole verificare che una particolare transazione sia inclusa in un blocco, non deve scaricare ogni transazione. Invece, può scaricare la parte superiore dell'albero di Merkle (la radice) insieme a un percorso di Merkle (l'insieme di hash necessari per ricostruire la radice di Merkle da una singola transazione).</dd>
+
+    <dt>Mnemonic</dt>
+    <dd>Anche chiamata frase di recupero o frase seme, una mnemonica è tipicamente una sequenza di 12 o 24 parole generate casualmente usate per creare e recuperare un portafoglio Bitcoin. La mnemonica rappresenta i dati esadecimali della tua chiave privata sotto forma di parole inglesi facilmente leggibili e memorizzabili (quindi più facili da usare per gli esseri umani). Viene utilizzata come piano di recupero di backup per accedere ai tuoi bitcoin, come delineato nel BIP 39. È essenziale mantenere segreta la tua mnemonica e seguire le migliori pratiche per la gestione del portafoglio per una custodia ottimale. Se compromessa, i tuoi bitcoin potrebbero essere soggetti a furto.</dd>
+
+    <dt>MuSig2</dt>
+    <dd>MuSig2 è un protocollo crittografico per creare multifirme basate su Schnorr in Bitcoin. Un miglioramento rispetto al protocollo MuSig originale, MuSig2 offre maggiore privacy, scalabilità e flessibilità rispetto alla multifirma standard, permettendo a un gruppo di firmatari di produrre una singola firma che rappresenta il loro consenso collettivo per una specifica transazione. In MuSig2, il materiale chiave di ogni firmatario è confidenziale e ha potere di veto, il che significa che la transazione può essere approvata solo se ogni firmatario del gruppo è d'accordo. Ciò permette una maggiore resistenza contro certi attacchi, come la cancellazione della chiave, così come gli attacchi con chiavi canaglia e di replay. MuSig2 è n-di-n, tuttavia, quando abbinato a Taproot, può simulare una firma con soglia t-di-n. Consideriamo 2-di-{A, B, C}, questo è equivalente a 2-di-{A,B}, 2-di-{A,C} o 2-di-{B,C}. Queste sono tutte MuSig 2-di-2, il che significa che puoi costruire il tuo output Taproot in modo che il percorso di spesa più probabile tra i tre diventi il percorso chiave Taproot, e gli altri due vengano inclusi nel percorso script Taproot.</dd>
 
     <dt></dt>
     <dd></dd>
@@ -221,8 +221,8 @@ BOLT #11: Protocollo di Fatturazione per Pagamenti Lightning</dd>
   
   <dl>
 
-    <dt></dt>
-    <dd></dd>
+    <dt>Opcode</dt>
+    <dd>Gli opcode, abbreviazione di codici operativi, sono i blocchi fondamentali nello Script Bitcoin che definiscono e abilitano varie operazioni sulla rete. Permettono agli utenti di impostare condizioni per le transazioni, manipolare dati sullo stack, eseguire calcoli, validare o invalidare transazioni e eseguire funzioni crittografiche, tra le altre funzioni. Alcuni opcode popolari (con valore esadecimale) e le loro funzioni: OP_CHECKSIG (0xAC): utilizzato per verificare che una firma digitale sia valida per una data chiave pubblica e transazione, assicurando che la persona che spende bitcoin abbia l'autorità per farlo. OP_RETURN (0x6A): marca un output di transazione come non spendibile e permette di incorporarvi una piccola quantità di dati arbitrari. È comunemente usato per aggiungere dati alla blockchain per varie applicazioni, come la marcatura temporale, l'ancoraggio o l'inclusione di metadati. OP_CHECKMULTISIG (0xAE): impiegato per controllare firme multiple contro chiavi pubbliche multiple, permettendo operazioni di multifirma (multisig) n-di-m dove un numero specificato (n) di firme da un insieme possibile (m) sono richieste per validare la transazione. È importante notare che gli opcode Bitcoin comprendono un ampio spettro di operazioni di base, mentre gli opcode di introspezione sono specificamente focalizzati sull'accesso ai dati delle transazioni.</dd>
 
     <dt></dt>
     <dd></dd>
