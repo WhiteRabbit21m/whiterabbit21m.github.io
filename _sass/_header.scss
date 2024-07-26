@@ -1,4 +1,4 @@
-// Variabili (assicurati che siano coerenti con il resto del tuo SCSS)
+// Variables
 $background-color: #121212;
 $text-color: #ffffff;
 $accent-color: #4CAF50;
@@ -13,7 +13,7 @@ $card-bg-color: #1E1E1E;
   left: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: padding 0.3s ease;
+  transition: padding 0.3s ease, transform 0.3s ease;
 }
 
 .header-container {
@@ -23,7 +23,6 @@ $card-bg-color: #1E1E1E;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  position: relative;
 }
 
 .logo {
@@ -47,84 +46,82 @@ $card-bg-color: #1E1E1E;
   }
 }
 
-.site-nav {
+.nav-cart-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon {
+  margin-left: 20px;
+  position: relative;
+  
   .nav-link {
-    color: rgba($text-color, 0.8);
-    text-decoration: none;
-    margin-left: 20px;
-    transition: color 0.3s ease;
-    &:hover {
-      color: $accent-color;
+    display: flex;
+    align-items: center;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
     }
+  }
+  #cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: $accent-color;
+    color: $text-color;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
   }
 }
 
-.menu-toggle {
-  display: none;
+// Scroll behavior
+.scroll-down .site-header {
+  transform: translateY(-100%);
+}
+
+.scroll-up .site-header {
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 0.5rem 0; // Ridotto il padding verticale
+    padding: 0.5rem 0;
   }
-
+  
   .header-container {
-    padding: 0 10px; // Ridotto il padding orizzontale
+    padding: 0 10px;
+    position: relative; // Add this
   }
-
+  
   .logo {
+    position: absolute; // Add this
+    left: 50%; // Add this
+    transform: translateX(-50%); // Add this
     .logo-image {
-      max-height: 40px; // Ridotta l'altezza massima del logo
+      max-height: 40px;
     }
     .site-title {
-      font-size: 1.2rem; // Ridotta la dimensione del testo del titolo
+      font-size: 1.2rem;
     }
   }
+  
+  .nav-cart-wrapper {
+    width: 100%; // Add this
+    justify-content: space-between; // Add this
+  }
+  
+  .cart-icon {
+    margin-left: 0;
+  }
 
+  // Add these styles for the menu toggle
   .menu-toggle {
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px; // Ridotto il padding
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem; // Ridotta la dimensione dell'icona del menu
-  }
-
-  .site-nav {
-    display: none;
-  }
-
-  body.menu-open .site-nav {
-    display: block;
-    position: fixed;
-    top: 60px; // Regolato in base alla nuova altezza dell'header
-    left: 0;
-    right: 0;
-    background-color: $card-bg-color;
-    padding: 15px; // Ridotto il padding
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-
-    .nav-link {
-      display: block;
-      margin: 8px 0; // Ridotto il margine
-      padding: 8px; // Ridotto il padding
-      text-align: center;
-      font-size: 1rem; // Ridotta la dimensione del testo dei link
-    }
-  }
-}
-
-// Stile per il pulsante toggle (se stai usando un'icona hamburger)
-.menu-toggle {
-  span {
-    display: block;
-    width: 20px; // Ridotta la larghezza
-    height: 2px; // Ridotta l'altezza
-    background-color: $text-color;
-    margin: 4px 0; // Ridotto il margine
+    order: -1; // Ensure it's on the left
   }
 }
