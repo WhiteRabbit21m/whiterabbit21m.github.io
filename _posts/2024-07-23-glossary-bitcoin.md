@@ -358,7 +358,6 @@ Benvenuti nel nostro glossario completo di termini Bitcoin. Usa l'indice qui sot
     <dd>Una classe di funzioni matematiche che permettono a qualcuno di dimostrare di conoscere qualcosa su un valore nascosto senza rivelare quel valore.Bulletproofs, Bulletproofs++, zk-STARKS e zk-SNARKS sono tutti esempi di diverse tecniche ZKP. Ognuna offre diversi compromessi e ha distinti vantaggi e svantaggi. Non esiste una soluzione ZKP unica adatta a tutti i casi.</dd>
 
   </dl>
-
 </div>
 
 <script>
