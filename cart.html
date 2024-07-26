@@ -1,0 +1,29 @@
+---
+layout: page
+title: Cart
+permalink: /cart/
+---
+<div class="cart-checkout-container">
+  <div class="checkout-form-container">
+    <h2>Checkout</h2>
+    <form id="checkout-form">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="address" placeholder="Address" required>
+      <input type="text" name="city" placeholder="City" required>
+      <input type="text" name="zip" placeholder="ZIP/Postal Code" required>
+      <input type="text" name="country" placeholder="Country" required>
+      <button type="submit" class="cta-button">Complete Purchase</button>
+    </form>
+  </div>
+  
+  <div class="cart-summary-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+      <!-- Cart items will be dynamically inserted here by JavaScript -->
+    </div>
+    <p>Total: <span id="cart-total">0 USD</span></p>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
