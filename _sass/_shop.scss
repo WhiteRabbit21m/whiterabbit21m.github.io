@@ -1,0 +1,260 @@
+// Variables
+$accent-color: #4CAF50;
+$text-color: #ffffff;
+$card-bg-color: #1E1E1E;
+$remove-button-color: #ff4444;
+$page-max-width: 1200px; // Larghezza massima della pagina
+
+.container {
+  width: 100%;
+  max-width: $page-max-width;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.shop-container {
+  @extend .container;
+  
+  h1, h2 {
+    color: $accent-color;
+    margin-bottom: 20px;
+  }
+}
+
+.product-categories {
+  margin-bottom: 30px;
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  li {
+    margin-right: 20px;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  
+  a {
+    color: $accent-color;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+    transition: background-color 0.3s ease;
+    
+    &:hover, &.active {
+      background-color: rgba($accent-color, 0.1);
+      text-decoration: underline;
+    }
+  }
+}
+
+.product-section {
+  margin-bottom: 40px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Ensure all cards have the same height
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  h3 {
+    color: $accent-color;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: $text-color;
+    margin-bottom: 15px;
+  }
+  
+  .price {
+    font-weight: bold;
+    color: $accent-color;
+    margin-top: auto; // Push the price to the bottom of the content
+  }
+  
+  .add-to-cart {
+    @extend .cta-button;
+    width: 100%;
+    margin-top: 15px; // Add some space above the button
+  }
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: $accent-color;
+  color: $text-color;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+  
+  &:hover, &:focus {
+    background-color: darken($accent-color, 10%);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Styles for cart and checkout
+.cart-checkout-container {
+  @extend .container;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 30px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.checkout-form-container,
+.cart-summary-container {
+  flex: 1;
+  min-width: 0; // Allows flex items to shrink below their base size
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-form-container {
+  h2 {
+    color: $accent-color;
+    margin-bottom: 20px;
+  }
+
+  #checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    input {
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #333;
+      background-color: #2C2C2C;
+      color: $text-color;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+        border-color: $accent-color;
+      }
+    }
+
+    button[type="submit"] {
+      @extend .cta-button;
+    }
+  }
+}
+
+.cart-summary-container {
+  h2 {
+    color: $accent-color;
+    margin-bottom: 20px;
+  }
+
+  #cart-items {
+    margin-bottom: 15px;
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: rgba(lighten($card-bg-color, 10%), 0.5);
+      border-radius: 4px;
+
+      p {
+        color: $text-color;
+        margin: 0;
+        flex-grow: 1;
+      }
+
+      .remove-from-cart {
+        background-color: transparent;
+        color: $remove-button-color;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        padding: 0 10px;
+        line-height: 1;
+
+        &:hover {
+          color: darken($remove-button-color, 10%);
+        }
+      }
+    }
+  }
+
+  #cart-total {
+    font-weight: bold;
+    color: $accent-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-categories {
+    ul {
+      flex-wrap: wrap;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+  }
+  
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-button {
+    padding: 12px 24px;
+  }
+}
