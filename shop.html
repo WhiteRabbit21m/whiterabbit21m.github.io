@@ -1,0 +1,122 @@
+---
+layout: page
+title: Shop
+permalink: /shop/
+---
+<div class="shop-container">
+  <h1>Store</h1>
+  
+  <nav class="product-categories">
+    <h2>Categories</h2>
+    <ul>
+      <li><a href="#books" class="category-link" data-category="books">Books</a></li>
+      <li><a href="#hardware" class="category-link" data-category="hardware">Hardware</a></li>
+      <li><a href="#services" class="category-link" data-category="services">Services</a></li>
+    </ul>
+  </nav>
+
+  <div id="books" class="product-section" style="display: none;">
+    <h2>Books</h2>
+    <div class="product-list">
+      {% for book in site.data.products.books %}
+        <div class="product-card">
+          <img src="{{ book.image }}" alt="{{ book.name }}">
+          <h3>{{ book.name }}</h3>
+          <p>{{ book.description }}</p>
+          <p class="price">{{ book.price }} USD</p>
+          <button class="add-to-cart" data-id="{{ book.id }}">Add to Cart</button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="hardware" class="product-section" style="display: none;">
+    <h2>Hardware</h2>
+    <div class="product-list">
+      {% for item in site.data.products.hardware %}
+        <div class="product-card">
+          <img src="{{ item.image }}" alt="{{ item.name }}">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+          <p class="price">{{ item.price }} USD</p>
+          <button class="add-to-cart" data-id="{{ item.id }}">Add to Cart</button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="services" class="product-section" style="display: none;">
+    <h2>Services</h2>
+    <div class="product-list">
+      {% for service in site.data.products.services %}
+        <div class="product-card">
+          <img src="{{ service.image }}" alt="{{ service.name }}">
+          <h3>{{ service.name }}</h3>
+          <p>{{ service.description }}</p>
+          <p class="price">{{ service.price }} USD</p>
+          <button class="add-to-cart" data-id="{{ service.id }}">Add to Cart</button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  var productsData = {
+    books: [
+      {% for book in site.data.products.books %}
+        {
+          id: "{{ book.id }}",
+          name: "{{ book.name | escape }}",
+          price: "{{ book.price }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    hardware: [
+      {% for item in site.data.products.hardware %}
+        {
+          id: "{{ item.id }}",
+          name: "{{ item.name | escape }}",
+          price: "{{ item.price }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    services: [
+      {% for service in site.data.products.services %}
+        {
+          id: "{{ service.id }}",
+          name: "{{ service.name | escape }}",
+          price: "{{ service.price }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  };
+</script>
+<script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const categoryLinks = document.querySelectorAll('.category-link');
+  const productSections = document.querySelectorAll('.product-section');
+
+  function showCategory(categoryId) {
+    productSections.forEach(section => {
+      section.style.display = section.id === categoryId ? 'block' : 'none';
+    });
+  }
+
+  categoryLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const category = this.getAttribute('data-category');
+      showCategory(category);
+    });
+  });
+
+  // Show the first category by default
+  if (categoryLinks.length > 0) {
+    const firstCategory = categoryLinks[0].getAttribute('data-category');
+    showCategory(firstCategory);
+  }
+});
+</script>
