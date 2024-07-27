@@ -1,0 +1,94 @@
+---
+layout: default
+---
+<div class="product-detail">
+  <h1>{{ page.name }}</h1>
+  <img src="{{ page.image }}" alt="{{ page.name }}">
+  <p class="price">{{ page.price }} USD</p>
+  <p class="description">{{ page.description }}</p>
+  
+  {% if page.author %}
+    <p><strong>Autore:</strong> {{ page.author }}</p>
+  {% endif %}
+  
+  {% if page.pages %}
+    <p><strong>Pagine:</strong> {{ page.pages }}</p>
+  {% endif %}
+  
+  {% if page.publisher %}
+    <p><strong>Editore:</strong> {{ page.publisher }}</p>
+  {% endif %}
+  
+  {% if page.publication_date %}
+    <p><strong>Data di pubblicazione:</strong> {{ page.publication_date }}</p>
+  {% endif %}
+  
+  {% if page.weight %}
+    <p><strong>Peso:</strong> {{ page.weight }} kg</p>
+  {% endif %}
+  
+  {% if page.dimensions %}
+    <p><strong>Dimensioni:</strong> {{ page.dimensions }}</p>
+  {% endif %}
+  
+  {% if page.manufacturer %}
+    <p><strong>Produttore:</strong> {{ page.manufacturer }}</p>
+  {% endif %}
+  
+  {% if page.connectivity %}
+    <p><strong>Connettività:</strong> {{ page.connectivity }}</p>
+  {% endif %}
+  
+  {% if page.supported_coins %}
+    <p><strong>Criptovalute supportate:</strong> {{ page.supported_coins | join: ", " }}</p>
+  {% endif %}
+  
+  {% if page.screen %}
+    <p><strong>Schermo:</strong> {{ page.screen }}</p>
+  {% endif %}
+  
+  {% if page.duration %}
+    <p><strong>Durata:</strong> {{ page.duration }}</p>
+  {% endif %}
+  
+  {% if page.format %}
+    <p><strong>Formato:</strong> {{ page.format }}</p>
+  {% endif %}
+  
+  {% if page.includes %}
+    <p><strong>Include:</strong></p>
+    <ul>
+      {% for item in page.includes %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+  {% if page.sold_out %}
+    <button class="sold-out-button" disabled>Sold Out</button>
+  {% else %}
+    <button class="add-to-cart" data-id="{{ page.id }}">Add to Cart</button>
+  {% endif %}
+</div>
+
+<script>
+  var productData = {
+    id: "{{ page.id }}",
+    name: "{{ page.name | escape }}",
+    price: "{{ page.price }}",
+    sold_out: {% if page.sold_out %}true{% else %}false{% endif %}
+  };
+</script>
+
+<script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCartButton = document.querySelector('.add-to-cart');
+  if (addToCartButton) {
+    addToCartButton.addEventListener('click', function() {
+      addToCart(productData);
+    });
+  }
+});
+</script>
