@@ -3,7 +3,7 @@ layout: product
 id: book2
 name: "Mastering Bitcoin"
 description: "Programming the Open Blockchain"
-price: 0.10
+price: 29.99
 image: "/assets/images/products/mastering-bitcoin.jpg"
 author: "Andreas M. Antonopoulos"
 pages: 416
