@@ -15,11 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function addToCart(event) {
         const productId = event.target.dataset.id;
         const product = findProduct(productId);
-        if (product) {
+        if (product && !product.sold_out) {
             cart.push(product);
             updateCartDisplay();
             saveCart();
             console.log('Product added to cart:', product);
+        } else if (product && product.sold_out) {
+            console.error(`Product with id ${productId} is sold out`);
         } else {
             console.error(`Unable to add product with id ${productId} to cart`);
         }
