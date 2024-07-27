@@ -10,7 +10,7 @@ books:
     publication_date: "2018-04-24"
     weight: "0.5" # in kg
     dimensions: "15.2 x 2.5 x 22.9 cm"
-    sold_out: true
+    sold_out: false
   - id: book2
     name: "Mastering Bitcoin"
     description: "Programming the Open Blockchain"
@@ -22,18 +22,6 @@ books:
     publication_date: "2017-07-01"
     weight: "0.9" # in kg
     dimensions: "17.8 x 2.3 x 23.3 cm"
-    sold_out: false
-  - id: book3
-    name: "Bitcoin Standard"
-    description: "The decentralized alternative to central banking"
-    price: 19.99
-    image: "/assets/images/products/bitcoin-standard.jpg"
-    author: "Saifedean Ammous"
-    pages: 304
-    publisher: "Wiley"
-    publication_date: "2018-04-24"
-    weight: "0.5" # in kg
-    dimensions: "15.2 x 2.5 x 22.9 cm"
     sold_out: true
 hardware:
   - id: hardware1
@@ -43,7 +31,7 @@ hardware:
     image: "/assets/images/products/trezor-model-t.jpg"
     manufacturer: "SatoshiLabs"
     connectivity: "USB-C"
-    supported_coins: ["Bitcoin", "Ethereum", "Litecoin", "and 1000+ more"]
+    supported_coins: ["Bitcoin"]
     screen: "Full-color touchscreen"
     dimensions: "64 x 39 x 10 mm"
     weight: "22g"
