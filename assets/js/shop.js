@@ -8,22 +8,41 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCart();
     checkAndClearCart();
 
+    // Gestione dell'aggiunta al carrello per tutti i pulsanti "Aggiungi al Carrello"
     document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', addToCart);
+        button.addEventListener('click', function() {
+            const productId = this.dataset.id;
+            let product;
+
+            if (document.querySelector('.product-detail')) {
+                // Siamo nella pagina di dettaglio del prodotto
+                product = {
+                    id: productId,
+                    name: document.querySelector('.product-detail h1').textContent,
+                    price: document.querySelector('.product-detail .price').textContent.replace(' USD', ''),
+                    sold_out: false // Assumiamo che se il bottone è cliccabile, il prodotto non è esaurito
+                };
+            } else {
+                // Siamo nella pagina principale del negozio
+                product = findProduct(productId);
+            }
+
+            if (product) {
+                addToCart(product);
+            }
+        });
     });
 
-    function addToCart(event) {
-        const productId = event.target.dataset.id;
-        const product = findProduct(productId);
+    function addToCart(product) {
         if (product && !product.sold_out) {
             cart.push(product);
             updateCartDisplay();
             saveCart();
             console.log('Product added to cart:', product);
         } else if (product && product.sold_out) {
-            console.error(`Product with id ${productId} is sold out`);
+            console.error(`Product with id ${product.id} is sold out`);
         } else {
-            console.error(`Unable to add product with id ${productId} to cart`);
+            console.error(`Unable to add product with id ${product.id} to cart`);
         }
     }
 
@@ -35,9 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function findProduct(id) {
-        for (let category in productsData) {
-            const product = productsData[category].find(p => p.id === id);
-            if (product) return product;
+        if (typeof productsData !== 'undefined') {
+            for (let category in productsData) {
+                const product = productsData[category].find(p => p.id === id);
+                if (product) return product;
+            }
         }
         return null;
     }
