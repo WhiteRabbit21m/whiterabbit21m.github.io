@@ -2,7 +2,7 @@ books:
   - id: book1
     name: "Bitcoin Standard"
     description: "The decentralized alternative to central banking"
-    price: 0.10
+    price: 19.99
     image: "/assets/images/products/bitcoin-standard.jpg"
     author: "Saifedean Ammous"
     pages: 304
@@ -10,11 +10,11 @@ books:
     publication_date: "2018-04-24"
     weight: "0.5" # in kg
     dimensions: "15.2 x 2.5 x 22.9 cm"
-    sold_out: false
+    sold_out: true
   - id: book2
     name: "Mastering Bitcoin"
     description: "Programming the Open Blockchain"
-    price: 0.10
+    price: 29.99
     image: "/assets/images/products/mastering-bitcoin.jpg"
     author: "Andreas M. Antonopoulos"
     pages: 416
@@ -35,7 +35,7 @@ hardware:
     screen: "Full-color touchscreen"
     dimensions: "64 x 39 x 10 mm"
     weight: "22g"
-    sold_out: false
+    sold_out: true
   - id: hardware2
     name: "Coldcard Mk4"
     description: "Air-gapped Bitcoin hardware wallet"
