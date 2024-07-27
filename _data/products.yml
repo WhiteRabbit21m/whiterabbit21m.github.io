@@ -1,6 +1,6 @@
 books:
   - id: book1
-    name: "Example"
+    name: "Bitcoin Standard"
     description: "The decentralized alternative to central banking"
     price: 0.10
     image: "/assets/images/products/bitcoin-standard.jpg"
@@ -10,23 +10,23 @@ books:
     publication_date: "2018-04-24"
     weight: "0.5" # in kg
     dimensions: "15.2 x 2.5 x 22.9 cm"
-
+    sold_out: true
   - id: book2
-    name: "Example"
-    description: "The decentralized alternative to central banking"
+    name: "Mastering Bitcoin"
+    description: "Programming the Open Blockchain"
     price: 0.10
-    image: "/assets/images/products/bitcoin-standard.jpg"
-    author: "Saifedean Ammous"
-    pages: 304
-    publisher: "Wiley"
-    publication_date: "2018-04-24"
-    weight: "0.5" # in kg
-    dimensions: "15.2 x 2.5 x 22.9 cm"
-
+    image: "/assets/images/products/mastering-bitcoin.jpg"
+    author: "Andreas M. Antonopoulos"
+    pages: 416
+    publisher: "O'Reilly Media"
+    publication_date: "2017-07-01"
+    weight: "0.9" # in kg
+    dimensions: "17.8 x 2.3 x 23.3 cm"
+    sold_out: false
   - id: book3
-    name: "Example"
+    name: "Bitcoin Standard"
     description: "The decentralized alternative to central banking"
-    price: 0.10
+    price: 19.99
     image: "/assets/images/products/bitcoin-standard.jpg"
     author: "Saifedean Ammous"
     pages: 304
@@ -34,22 +34,10 @@ books:
     publication_date: "2018-04-24"
     weight: "0.5" # in kg
     dimensions: "15.2 x 2.5 x 22.9 cm"
-
-  - id: book4
-    name: "Example"
-    description: "The decentralized alternative to central banking"
-    price: 0.10
-    image: "/assets/images/products/bitcoin-standard.jpg"
-    author: "Saifedean Ammous"
-    pages: 304
-    publisher: "Wiley"
-    publication_date: "2018-04-24"
-    weight: "0.5" # in kg
-    dimensions: "15.2 x 2.5 x 22.9 cm"
-
+    sold_out: true
 hardware:
   - id: hardware1
-    name: "Example"
+    name: "Trezor Model T"
     description: "Next-generation cryptocurrency hardware wallet"
     price: 159.99
     image: "/assets/images/products/trezor-model-t.jpg"
@@ -59,76 +47,35 @@ hardware:
     screen: "Full-color touchscreen"
     dimensions: "64 x 39 x 10 mm"
     weight: "22g"
-
+    sold_out: false
   - id: hardware2
-    name: "Example"
-    description: "Next-generation cryptocurrency hardware wallet"
-    price: 159.99
-    image: "/assets/images/products/trezor-model-t.jpg"
-    manufacturer: "SatoshiLabs"
-    connectivity: "USB-C"
-    supported_coins: ["Bitcoin", "Ethereum", "Litecoin", "and 1000+ more"]
-    screen: "Full-color touchscreen"
-    dimensions: "64 x 39 x 10 mm"
-    weight: "22g"
-
-  - id: hardware3
-    name: "Example"
-    description: "Next-generation cryptocurrency hardware wallet"
-    price: 159.99
-    image: "/assets/images/products/trezor-model-t.jpg"
-    manufacturer: "SatoshiLabs"
-    connectivity: "USB-C"
-    supported_coins: ["Bitcoin", "Ethereum", "Litecoin", "and 1000+ more"]
-    screen: "Full-color touchscreen"
-    dimensions: "64 x 39 x 10 mm"
-    weight: "22g"
-
-  - id: hardware4
-    name: "Example"
-    description: "Next-generation cryptocurrency hardware wallet"
-    price: 159.99
-    image: "/assets/images/products/trezor-model-t.jpg"
-    manufacturer: "SatoshiLabs"
-    connectivity: "USB-C"
-    supported_coins: ["Bitcoin", "Ethereum", "Litecoin", "and 1000+ more"]
-    screen: "Full-color touchscreen"
-    dimensions: "64 x 39 x 10 mm"
-    weight: "22g"
-
+    name: "Coldcard Mk4"
+    description: "Air-gapped Bitcoin hardware wallet"
+    price: 119.99
+    image: "/assets/images/products/coldcard-mk4.jpg"
+    manufacturer: "Coinkite"
+    connectivity: "USB-C, MicroSD"
+    supported_coins: ["Bitcoin"]
+    screen: "OLED"
+    dimensions: "88 x 51 x 9 mm"
+    weight: "29g"
+    sold_out: true
 services:
   - id: services1
-    name: "Example"
+    name: "Bitcoin Consultation"
     description: "One-hour personal consultation on Bitcoin investment strategies"
     price: 99.99
     image: "/assets/images/products/btc-consultation.jpg"
     duration: "60 minutes"
     format: "Video call"
     includes: ["Investment strategy discussion", "Security best practices", "Q&A session"]
-
+    sold_out: true
   - id: services2
-    name: "Example"
-    description: "One-hour personal consultation on Bitcoin investment strategies"
-    price: 99.99
-    image: "/assets/images/products/btc-consultation.jpg"
-    duration: "60 minutes"
-    format: "Video call"
-    includes: ["Investment strategy discussion", "Security best practices", "Q&A session"]
-
-  - id: services3
-    name: "Example"
-    description: "One-hour personal consultation on Bitcoin investment strategies"
-    price: 99.99
-    image: "/assets/images/products/btc-consultation.jpg"
-    duration: "60 minutes"
-    format: "Video call"
-    includes: ["Investment strategy discussion", "Security best practices", "Q&A session"]
-
-  - id: services4
-    name: "Example"
-    description: "One-hour personal consultation on Bitcoin investment strategies"
-    price: 99.99
-    image: "/assets/images/products/btc-consultation.jpg"
-    duration: "60 minutes"
-    format: "Video call"
-    includes: ["Investment strategy discussion", "Security best practices", "Q&A session"]
+    name: "Lightning Node Setup"
+    description: "Remote assistance in setting up your own Lightning Network node"
+    price: 199.99
+    image: "/assets/images/products/lightning-setup.jpg"
+    duration: "Up to 3 hours"
+    format: "Remote assistance"
+    includes: ["Hardware recommendation", "Software installation", "Channel opening guidance", "Basic operation training"]
+    sold_out: true
