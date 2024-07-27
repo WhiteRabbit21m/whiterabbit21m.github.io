@@ -48,8 +48,11 @@ collections:
   posts:
     output: true
     permalink: /blog/:year/:month/:day/:title/
+  products:
+    output: true
+    permalink: /products/:title/
 
-# Impostazioni di default per i post
+# Impostazioni di default per i post e i prodotti
 defaults:
   -
     scope:
@@ -59,6 +62,12 @@ defaults:
       layout: "post"
       author: "whiterabbit21m"
       comments: true
+  -
+    scope:
+      path: ""
+      type: "products"
+    values:
+      layout: "product"
 
 # Impostazioni di paginazione
 paginate: 6
