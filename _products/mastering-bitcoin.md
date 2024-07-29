@@ -1,6 +1,6 @@
 ---
 layout: product
-id: book2
+product_id: book2
 name: "Mastering Bitcoin"
 description: "Programming the Open Blockchain"
 price: 0.10
