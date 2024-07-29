@@ -67,12 +67,12 @@ layout: default
   {% if page.sold_out %}
     <button class="sold-out-button" disabled>Sold Out</button>
   {% else %}
-    <button class="add-to-cart" data-id="{{ page.id }}">Add to Cart</button>
+    <button class="add-to-cart" data-id="{{ page.product_id }}">Add to Cart</button>
   {% endif %}
 </div>
 <script>
   var productData = {
-    id: "{{ page.id }}",
+    id: "{{ page.product_id }}",
     name: "{{ page.name | escape }}",
     price: "{{ page.price }}",
     sold_out: {% if page.sold_out %}true{% else %}false{% endif %}
