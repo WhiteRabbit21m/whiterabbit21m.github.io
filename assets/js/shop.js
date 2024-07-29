@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', function() {
             const productId = this.dataset.id;
             console.log('Add to cart clicked for product ID:', productId); // Debug log
+            if (!productId) {
+                console.error('Product ID is missing');
+                return;
+            }
             const quantityInput = this.parentElement.querySelector('.quantity-input');
             const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
@@ -91,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function findProduct(id) {
         console.log('Searching for product with id:', id); // Debug log
         console.log('productsData:', productsData); // Debug log
-        if (typeof productsData !== 'undefined') {
+        if (typeof productsData !== 'undefined' && id) {
             for (let category in productsData) {
                 const product = productsData[category].find(p => p.id === id);
                 if (product) {
