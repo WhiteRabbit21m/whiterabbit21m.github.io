@@ -124,3 +124,27 @@ permalink: /shop/
 </script>
 
 <script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const categoryLinks = document.querySelectorAll('.category-link');
+  const productSections = document.querySelectorAll('.product-section');
+  function showCategory(categoryId) {
+    productSections.forEach(section => {
+      section.style.display = section.id === categoryId ? 'block' : 'none';
+    });
+  }
+  categoryLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const category = this.getAttribute('data-category');
+      showCategory(category);
+    });
+  });
+  // Show the first category by default
+  if (categoryLinks.length > 0) {
+    const firstCategory = categoryLinks[0].getAttribute('data-category');
+    showCategory(firstCategory);
+  }
+});
+</script>
