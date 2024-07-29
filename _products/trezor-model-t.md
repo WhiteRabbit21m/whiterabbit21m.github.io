@@ -11,5 +11,5 @@ supported_coins: ["Bitcoin"]
 screen: "Full-color touchscreen"
 dimensions: "64 x 39 x 10 mm"
 weight: "22g"
-sold_out: false
+sold_out: true
 ---
