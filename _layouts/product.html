@@ -67,10 +67,14 @@ layout: default
   {% if page.sold_out %}
     <button class="sold-out-button" disabled>Sold Out</button>
   {% else %}
+    <div class="quantity-selector">
+      <button class="quantity-btn decrease">-</button>
+      <input type="number" class="quantity-input" value="1" min="1" max="99">
+      <button class="quantity-btn increase">+</button>
+    </div>
     <button class="add-to-cart" data-id="{{ page.id }}">Add to Cart</button>
   {% endif %}
 </div>
-
 <script>
   var productData = {
     id: "{{ page.id }}",
@@ -79,16 +83,40 @@ layout: default
     sold_out: {% if page.sold_out %}true{% else %}false{% endif %}
   };
 </script>
-
 <script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const addToCartButton = document.querySelector('.add-to-cart');
-  if (addToCartButton) {
+  const quantityInput = document.querySelector('.quantity-input');
+  const decreaseBtn = document.querySelector('.decrease');
+  const increaseBtn = document.querySelector('.increase');
+
+  if (addToCartButton && quantityInput) {
     addToCartButton.addEventListener('click', function() {
-      addToCart(productData);
+      const quantity = parseInt(quantityInput.value);
+      addToCart(productData, quantity);
     });
+  }
+
+  if (decreaseBtn && increaseBtn && quantityInput) {
+    decreaseBtn.addEventListener('click', () => updateQuantity(quantityInput, -1));
+    increaseBtn.addEventListener('click', () => updateQuantity(quantityInput, 1));
+    quantityInput.addEventListener('change', () => validateQuantity(quantityInput));
+  }
+
+  function updateQuantity(input, change) {
+    let newValue = parseInt(input.value) + change;
+    newValue = Math.max(1, Math.min(99, newValue)); // Ensure value is between 1 and 99
+    input.value = newValue;
+  }
+
+  function validateQuantity(input) {
+    let value = parseInt(input.value);
+    if (isNaN(value) || value < 1) {
+      input.value = 1;
+    } else if (value > 99) {
+      input.value = 99;
+    }
   }
 });
 </script>
