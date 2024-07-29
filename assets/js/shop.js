@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function() {
             const productId = this.dataset.id;
+            console.log('Add to cart clicked for product ID:', productId); // Debug log
             const quantityInput = this.parentElement.querySelector('.quantity-input');
             const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (document.querySelector('.product-detail')) {
                 // We're on the product detail page
                 product = productData;
+                console.log('Product data from detail page:', product); // Debug log
             } else {
                 // We're on the main shop page
                 product = findProduct(productId);
@@ -38,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (product) {
                 addToCart(product, quantity);
+            } else {
+                console.error('Product not found for ID:', productId); // Debug log
             }
         });
     });
@@ -58,16 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function addToCart(product, quantity = 1) {
+        console.log('Adding product to cart:', product, 'Quantity:', quantity); // Debug log
         if (product && !product.sold_out) {
             const existingItem = cart.find(item => item.id === product.id);
             if (existingItem) {
                 existingItem.quantity += quantity;
+                console.log('Updated existing item in cart:', existingItem); // Debug log
             } else {
                 cart.push({...product, quantity});
+                console.log('Added new item to cart:', {...product, quantity}); // Debug log
             }
             updateCartDisplay();
             saveCart();
-            console.log('Product added to cart:', product, 'Quantity:', quantity);
         } else if (product && product.sold_out) {
             console.error(`Product with id ${product.id} is sold out`);
         } else {
@@ -76,17 +82,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function removeFromCart(index) {
+        console.log('Removing item from cart at index:', index); // Debug log
         cart.splice(index, 1);
         updateCartDisplay();
         saveCart();
-        console.log('Product removed from cart at index:', index);
     }
 
     function findProduct(id) {
+        console.log('Searching for product with id:', id); // Debug log
+        console.log('productsData:', productsData); // Debug log
         if (typeof productsData !== 'undefined') {
             for (let category in productsData) {
                 const product = productsData[category].find(p => p.id === id);
-                if (product) return product;
+                if (product) {
+                    console.log('Found product:', product); // Debug log
+                    return product;
+                }
             }
         }
         return null;
@@ -133,12 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
             cart = JSON.parse(savedCart);
+            console.log('Loaded cart from localStorage:', cart); // Debug log
             updateCartDisplay();
         }
     }
 
     function saveCart() {
         localStorage.setItem('cart', JSON.stringify(cart));
+        console.log('Saved cart to localStorage:', cart); // Debug log
         window.dispatchEvent(new Event('storage'));
     }
 
@@ -146,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cart = [];
         saveCart();
         updateCartDisplay();
+        console.log('Cart cleared'); // Debug log
     }
 
     function checkAndClearCart() {
