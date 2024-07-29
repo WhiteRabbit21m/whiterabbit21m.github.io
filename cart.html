@@ -1,9 +1,19 @@
 ---
 layout: page
-title: Cart
+title: Cart & Checkout
 permalink: /cart/
 ---
 <div class="cart-checkout-container">
+  <h1>Your Cart</h1>
+  
+  <div id="cart-items">
+    <!-- Cart items will be dynamically inserted here by JavaScript -->
+  </div>
+  
+  <div id="cart-summary">
+    <p>Total: <span id="cart-total">0 USD</span></p>
+  </div>
+
   <div class="checkout-form-container">
     <h2>Checkout</h2>
     <form id="checkout-form">
@@ -15,14 +25,6 @@ permalink: /cart/
       <input type="text" name="country" placeholder="Country" required>
       <button type="submit" class="cta-button">Complete Purchase</button>
     </form>
-  </div>
-  
-  <div class="cart-summary-container">
-    <h2>Your Cart</h2>
-    <div id="cart-items">
-      <!-- Cart items will be dynamically inserted here by JavaScript -->
-    </div>
-    <p>Total: <span id="cart-total">0 USD</span></p>
   </div>
 </div>
 
