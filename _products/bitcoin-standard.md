@@ -3,7 +3,7 @@ layout: product
 id: book1
 name: "Bitcoin Standard"
 description: "L'alternativa decentralizzata al sistema bancario centrale"
-price: 19.99
+price: 0.10
 image: "/assets/images/products/bitcoin-standard.jpg"
 author: "Saifedean Ammous"
 pages: 304
