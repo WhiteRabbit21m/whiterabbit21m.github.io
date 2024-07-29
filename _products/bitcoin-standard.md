@@ -11,5 +11,5 @@ publisher: "Wiley"
 publication_date: "2018-04-24"
 weight: "0.5"
 dimensions: "15.2 x 2.5 x 22.9 cm"
-sold_out: true
+sold_out: false
 ---
