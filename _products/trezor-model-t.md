@@ -1,6 +1,6 @@
 ---
 layout: product
-id: hardware1
+product_id: hardware1
 name: "Trezor Model T"
 description: "Next-generation cryptocurrency hardware wallet"
 price: 159.99
