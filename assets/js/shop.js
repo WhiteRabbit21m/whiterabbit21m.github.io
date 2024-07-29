@@ -8,37 +8,71 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCart();
     checkAndClearCart();
 
-    // Gestione dell'aggiunta al carrello per tutti i pulsanti "Aggiungi al Carrello"
+    // Handle quantity selection
+    document.querySelectorAll('.quantity-selector').forEach(selector => {
+        const decreaseBtn = selector.querySelector('.decrease');
+        const increaseBtn = selector.querySelector('.increase');
+        const input = selector.querySelector('.quantity-input');
+
+        decreaseBtn.addEventListener('click', () => updateQuantity(input, -1));
+        increaseBtn.addEventListener('click', () => updateQuantity(input, 1));
+        input.addEventListener('change', () => validateQuantity(input));
+    });
+
+    // Handle "Add to Cart" button clicks
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function() {
             const productId = this.dataset.id;
+            const quantityInput = this.parentElement.querySelector('.quantity-input');
+            const quantity = parseInt(quantityInput.value);
+
             let product;
 
             if (document.querySelector('.product-detail')) {
-                // Siamo nella pagina di dettaglio del prodotto
+                // We're on the product detail page
                 product = {
                     id: productId,
                     name: document.querySelector('.product-detail h1').textContent,
                     price: document.querySelector('.product-detail .price').textContent.replace(' USD', ''),
-                    sold_out: false // Assumiamo che se il bottone è cliccabile, il prodotto non è esaurito
+                    sold_out: false
                 };
             } else {
-                // Siamo nella pagina principale del negozio
+                // We're on the main shop page
                 product = findProduct(productId);
             }
 
             if (product) {
-                addToCart(product);
+                addToCart(product, quantity);
             }
         });
     });
 
-    function addToCart(product) {
+    function updateQuantity(input, change) {
+        let newValue = parseInt(input.value) + change;
+        newValue = Math.max(1, Math.min(99, newValue)); // Ensure value is between 1 and 99
+        input.value = newValue;
+    }
+
+    function validateQuantity(input) {
+        let value = parseInt(input.value);
+        if (isNaN(value) || value < 1) {
+            input.value = 1;
+        } else if (value > 99) {
+            input.value = 99;
+        }
+    }
+
+    function addToCart(product, quantity) {
         if (product && !product.sold_out) {
-            cart.push(product);
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({...product, quantity});
+            }
             updateCartDisplay();
             saveCart();
-            console.log('Product added to cart:', product);
+            console.log('Product added to cart:', product, 'Quantity:', quantity);
         } else if (product && product.sold_out) {
             console.error(`Product with id ${product.id} is sold out`);
         } else {
@@ -67,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cartItems && cartTotal) {
             cartItems.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
-                    <p>${item.name} - ${item.price} USD</p>
+                    <p>${item.name} - ${item.price} USD x ${item.quantity}</p>
                     <button class="remove-from-cart" data-index="${index}">×</button>
                 </div>
             `).join('');
@@ -85,13 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCartCount() {
         if (cartCount) {
-            cartCount.textContent = cart.length;
-            cartCount.style.display = cart.length > 0 ? 'inline' : 'none';
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'inline' : 'none';
         }
     }
 
     function calculateTotal() {
-        return cart.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
+        return cart.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0).toFixed(2);
     }
 
     function loadCart() {
@@ -117,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('clearCart') === 'true') {
             clearCart();
-            // Rimuovi il parametro clearCart dall'URL
+            // Remove the clearCart parameter from the URL
             urlParams.delete('clearCart');
             const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
             window.history.replaceState({}, '', newUrl);
@@ -131,10 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
     async function handleCheckout(event) {
         event.preventDefault();
 
-        // Controllo se il carrello è vuoto o se l'importo totale è 0
+        // Check if the cart is empty or if the total amount is 0
         if (cart.length === 0 || calculateTotal() === '0.00') {
-            alert('Your cart is empty. Please add items to your cart before checking out.');
-            return; // Esce dalla funzione senza creare l'invoice
+            alert('Your cart is empty. Please add items to your cart before proceeding to checkout.');
+            return; // Exit the function without creating the invoice
         }
 
         const formData = new FormData(checkoutForm);
@@ -143,7 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
         customerData.cart = cart.map(item => ({
             id: item.id,
             name: item.name,
-            price: item.price
+            price: item.price,
+            quantity: item.quantity
         }));
 
         try {
@@ -166,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function createBTCPayInvoice(customerData) {
         const btcPayServerUrl = 'https://btcpay.whiterabbit21m.com';
         const storeId = '5vHj4TmiyYMCkFUpyBYf6rUDvaJ6YA7B74v2G7iYD9D2';
-        const apiKey = 'xxxxxxxxxxxxxxxxxxxxx'; //AD YOUR APY KEY
+        const apiKey = 'xxxxxxxxxxxxxxxxxxxxx'; // ADD YOUR API KEY
 
         const shopPath = '/shop/';
         const fullShopUrl = new URL(shopPath, window.location.origin).toString();
@@ -174,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const detailedDescription = `
 Order Details:
-${cart.map(item => `- ${item.name}: $${item.price}`).join('\n')}
+${customerData.cart.map(item => `- ${item.name}: $${item.price} x ${item.quantity}`).join('\n')}
 
 Customer Information:
 Name: ${customerData.name}
