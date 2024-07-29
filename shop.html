@@ -27,6 +27,11 @@ permalink: /shop/
           {% if book.sold_out %}
             <button class="sold-out-button" disabled>Sold Out</button>
           {% else %}
+            <div class="quantity-selector">
+              <button class="quantity-btn decrease">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn increase">+</button>
+            </div>
             <button class="add-to-cart" data-id="{{ book.id }}">Add to Cart</button>
           {% endif %}
         </div>
@@ -46,6 +51,11 @@ permalink: /shop/
           {% if item.sold_out %}
             <button class="sold-out-button" disabled>Sold Out</button>
           {% else %}
+            <div class="quantity-selector">
+              <button class="quantity-btn decrease">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn increase">+</button>
+            </div>
             <button class="add-to-cart" data-id="{{ item.id }}">Add to Cart</button>
           {% endif %}
         </div>
@@ -65,10 +75,38 @@ permalink: /shop/
           {% if service.sold_out %}
             <button class="sold-out-button" disabled>Sold Out</button>
           {% else %}
+            <div class="quantity-selector">
+              <button class="quantity-btn decrease">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" max="99">
+              <button class="quantity-btn increase">+</button>
+            </div>
             <button class="add-to-cart" data-id="{{ service.id }}">Add to Cart</button>
           {% endif %}
         </div>
       {% endfor %}
+    </div>
+  </div>
+
+  <div class="cart-checkout-container">
+    <div class="checkout-form-container">
+      <h2>Checkout</h2>
+      <form id="checkout-form">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <input type="text" name="city" placeholder="City" required>
+        <input type="text" name="zip" placeholder="ZIP/Postal Code" required>
+        <input type="text" name="country" placeholder="Country" required>
+        <button type="submit" class="cta-button">Complete Purchase</button>
+      </form>
+    </div>
+    
+    <div class="cart-summary-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items">
+        <!-- Cart items will be dynamically inserted here by JavaScript -->
+      </div>
+      <p>Total: <span id="cart-total">0 USD</span></p>
     </div>
   </div>
 </div>
@@ -109,27 +147,3 @@ permalink: /shop/
 </script>
 
 <script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const categoryLinks = document.querySelectorAll('.category-link');
-  const productSections = document.querySelectorAll('.product-section');
-  function showCategory(categoryId) {
-    productSections.forEach(section => {
-      section.style.display = section.id === categoryId ? 'block' : 'none';
-    });
-  }
-  categoryLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const category = this.getAttribute('data-category');
-      showCategory(category);
-    });
-  });
-  // Show the first category by default
-  if (categoryLinks.length > 0) {
-    const firstCategory = categoryLinks[0].getAttribute('data-category');
-    showCategory(firstCategory);
-  }
-});
-</script>
