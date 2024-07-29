@@ -1,6 +1,6 @@
 ---
 layout: product
-id: book1
+product_id: book1
 name: "Bitcoin Standard"
 description: "L'alternativa decentralizzata al sistema bancario centrale"
 price: 0.10
