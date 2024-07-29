@@ -15,7 +15,7 @@ permalink: /shop/
     </ul>
   </nav>
   
-  <div id="books" class="product-section" style="display: none;">
+  <div id="books" class="product-section">
     <h2>Books</h2>
     <div class="product-list">
       {% for book in site.data.products.books %}
@@ -39,7 +39,7 @@ permalink: /shop/
     </div>
   </div>
   
-  <div id="hardware" class="product-section" style="display: none;">
+  <div id="hardware" class="product-section">
     <h2>Hardware</h2>
     <div class="product-list">
       {% for item in site.data.products.hardware %}
@@ -63,7 +63,7 @@ permalink: /shop/
     </div>
   </div>
   
-  <div id="services" class="product-section" style="display: none;">
+  <div id="services" class="product-section">
     <h2>Services</h2>
     <div class="product-list">
       {% for service in site.data.products.services %}
@@ -84,29 +84,6 @@ permalink: /shop/
           {% endif %}
         </div>
       {% endfor %}
-    </div>
-  </div>
-
-  <div class="cart-checkout-container">
-    <div class="checkout-form-container">
-      <h2>Checkout</h2>
-      <form id="checkout-form">
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="address" placeholder="Address" required>
-        <input type="text" name="city" placeholder="City" required>
-        <input type="text" name="zip" placeholder="ZIP/Postal Code" required>
-        <input type="text" name="country" placeholder="Country" required>
-        <button type="submit" class="cta-button">Complete Purchase</button>
-      </form>
-    </div>
-    
-    <div class="cart-summary-container">
-      <h2>Your Cart</h2>
-      <div id="cart-items">
-        <!-- Cart items will be dynamically inserted here by JavaScript -->
-      </div>
-      <p>Total: <span id="cart-total">0 USD</span></p>
     </div>
   </div>
 </div>
