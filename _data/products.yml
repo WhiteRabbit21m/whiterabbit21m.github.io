@@ -22,7 +22,7 @@ books:
     publication_date: "2017-07-01"
     weight: "0.9" # in kg
     dimensions: "17.8 x 2.3 x 23.3 cm"
-    sold_out: true
+    sold_out: false
 hardware:
   - id: hardware1
     name: "Trezor Model T"
@@ -35,7 +35,7 @@ hardware:
     screen: "Full-color touchscreen"
     dimensions: "64 x 39 x 10 mm"
     weight: "22g"
-    sold_out: true
+    sold_out: false
   - id: hardware2
     name: "Coldcard Mk4"
     description: "Air-gapped Bitcoin hardware wallet"
