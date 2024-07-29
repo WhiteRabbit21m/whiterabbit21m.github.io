@@ -67,11 +67,6 @@ layout: default
   {% if page.sold_out %}
     <button class="sold-out-button" disabled>Sold Out</button>
   {% else %}
-    <div class="quantity-selector">
-      <button class="quantity-btn decrease">-</button>
-      <input type="number" class="quantity-input" value="1" min="1" max="99">
-      <button class="quantity-btn increase">+</button>
-    </div>
     <button class="add-to-cart" data-id="{{ page.id }}">Add to Cart</button>
   {% endif %}
 </div>
@@ -84,3 +79,17 @@ layout: default
   };
 </script>
 <script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCartButton = document.querySelector('.add-to-cart');
+  if (addToCartButton) {
+    addToCartButton.addEventListener('click', function() {
+      if (typeof addToCart === 'function') {
+        addToCart(productData, 1); // Always add 1 item from the detail page
+      } else {
+        console.error('addToCart function not found');
+      }
+    });
+  }
+});
+</script>
