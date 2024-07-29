@@ -79,17 +79,3 @@ layout: default
   };
 </script>
 <script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const addToCartButton = document.querySelector('.add-to-cart');
-  if (addToCartButton) {
-    addToCartButton.addEventListener('click', function() {
-      if (typeof addToCart === 'function') {
-        addToCart(productData, 1); // Always add 1 item from the detail page
-      } else {
-        console.error('addToCart function not found');
-      }
-    });
-  }
-});
-</script>
