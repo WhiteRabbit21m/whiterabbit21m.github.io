@@ -15,7 +15,7 @@ permalink: /shop/
     </ul>
   </nav>
   
-  <div id="books" class="product-section" style="display: none;">
+  <div id="books" class="product-section">
     <h2>Books</h2>
     <div class="product-list">
       {% for book in site.data.products.books %}
@@ -32,14 +32,14 @@ permalink: /shop/
               <input type="number" class="quantity-input" value="1" min="1" max="99">
               <button class="quantity-btn increase">+</button>
             </div>
-            <button class="add-to-cart" data-id="{{ book.id }}">Add to Cart</button>
+            <button class="add-to-cart" data-id="{{ book.product_id }}">Add to Cart</button>
           {% endif %}
         </div>
       {% endfor %}
     </div>
   </div>
   
-  <div id="hardware" class="product-section" style="display: none;">
+  <div id="hardware" class="product-section">
     <h2>Hardware</h2>
     <div class="product-list">
       {% for item in site.data.products.hardware %}
@@ -56,14 +56,14 @@ permalink: /shop/
               <input type="number" class="quantity-input" value="1" min="1" max="99">
               <button class="quantity-btn increase">+</button>
             </div>
-            <button class="add-to-cart" data-id="{{ item.id }}">Add to Cart</button>
+            <button class="add-to-cart" data-id="{{ item.product_id }}">Add to Cart</button>
           {% endif %}
         </div>
       {% endfor %}
     </div>
   </div>
   
-  <div id="services" class="product-section" style="display: none;">
+  <div id="services" class="product-section">
     <h2>Services</h2>
     <div class="product-list">
       {% for service in site.data.products.services %}
@@ -80,7 +80,7 @@ permalink: /shop/
               <input type="number" class="quantity-input" value="1" min="1" max="99">
               <button class="quantity-btn increase">+</button>
             </div>
-            <button class="add-to-cart" data-id="{{ service.id }}">Add to Cart</button>
+            <button class="add-to-cart" data-id="{{ service.product_id }}">Add to Cart</button>
           {% endif %}
         </div>
       {% endfor %}
@@ -93,7 +93,7 @@ permalink: /shop/
     books: [
       {% for book in site.data.products.books %}
         {
-          id: "{{ book.id }}",
+          id: "{{ book.product_id }}",
           name: "{{ book.name | escape }}",
           price: "{{ book.price }}",
           sold_out: {% if book.sold_out %}true{% else %}false{% endif %}
@@ -103,7 +103,7 @@ permalink: /shop/
     hardware: [
       {% for item in site.data.products.hardware %}
         {
-          id: "{{ item.id }}",
+          id: "{{ item.product_id }}",
           name: "{{ item.name | escape }}",
           price: "{{ item.price }}",
           sold_out: {% if item.sold_out %}true{% else %}false{% endif %}
@@ -113,7 +113,7 @@ permalink: /shop/
     services: [
       {% for service in site.data.products.services %}
         {
-          id: "{{ service.id }}",
+          id: "{{ service.product_id }}",
           name: "{{ service.name | escape }}",
           price: "{{ service.price }}",
           sold_out: {% if service.sold_out %}true{% else %}false{% endif %}
@@ -121,31 +121,6 @@ permalink: /shop/
       {% endfor %}
     ]
   };
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const categoryLinks = document.querySelectorAll('.category-link');
-    const productSections = document.querySelectorAll('.product-section');
-
-    function showCategory(categoryId) {
-      productSections.forEach(section => {
-        section.style.display = section.id === categoryId ? 'block' : 'none';
-      });
-    }
-
-    categoryLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const category = this.getAttribute('data-category');
-        showCategory(category);
-      });
-    });
-
-    // Show the first category by default
-    if (categoryLinks.length > 0) {
-      const firstCategory = categoryLinks[0].getAttribute('data-category');
-      showCategory(firstCategory);
-    }
-  });
 </script>
 
 <script src="{{ '/assets/js/shop.js' | relative_url }}"></script>
