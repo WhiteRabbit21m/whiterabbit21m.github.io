@@ -36,7 +36,7 @@ hardware:
     screen: "Full-color touchscreen"
     dimensions: "64 x 39 x 10 mm"
     weight: "22g"
-    sold_out: false
+    sold_out: true
   - product_id: hardware2
     name: "Coldcard Mk4"
     description: "Air-gapped Bitcoin hardware wallet"
@@ -48,7 +48,7 @@ hardware:
     screen: "OLED"
     dimensions: "88 x 51 x 9 mm"
     weight: "29g"
-    sold_out: true
+    sold_out: false
 
 services:
   - product_id: services1
