@@ -30,7 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (document.querySelector('.product-detail')) {
                 // We're on the product detail page
-                product = productData;
+                product = {
+                    id: productData.id,
+                    name: productData.name,
+                    price: productData.price,
+                    sold_out: productData.sold_out
+                };
             } else {
                 // We're on the main shop page
                 product = findProduct(productId);
