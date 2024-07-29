@@ -1,5 +1,5 @@
 books:
-  - id: book1
+  - product_id: book1
     name: "Bitcoin Standard"
     description: "The decentralized alternative to central banking"
     price: 0.10
@@ -11,7 +11,7 @@ books:
     weight: "0.5" # in kg
     dimensions: "15.2 x 2.5 x 22.9 cm"
     sold_out: false
-  - id: book2
+  - product_id: book2
     name: "Mastering Bitcoin"
     description: "Programming the Open Blockchain"
     price: 0.10
@@ -23,8 +23,9 @@ books:
     weight: "0.9" # in kg
     dimensions: "17.8 x 2.3 x 23.3 cm"
     sold_out: false
+
 hardware:
-  - id: hardware1
+  - product_id: hardware1
     name: "Trezor Model T"
     description: "Next-generation cryptocurrency hardware wallet"
     price: 159.99
@@ -36,7 +37,7 @@ hardware:
     dimensions: "64 x 39 x 10 mm"
     weight: "22g"
     sold_out: false
-  - id: hardware2
+  - product_id: hardware2
     name: "Coldcard Mk4"
     description: "Air-gapped Bitcoin hardware wallet"
     price: 119.99
@@ -48,22 +49,30 @@ hardware:
     dimensions: "88 x 51 x 9 mm"
     weight: "29g"
     sold_out: true
+
 services:
-  - id: services1
+  - product_id: services1
     name: "Bitcoin Consultation"
     description: "One-hour personal consultation on Bitcoin investment strategies"
     price: 99.99
     image: "/assets/images/products/btc-consultation.jpg"
     duration: "60 minutes"
     format: "Video call"
-    includes: ["Investment strategy discussion", "Security best practices", "Q&A session"]
-    sold_out: true
-  - id: services2
+    includes: 
+      - "Investment strategy discussion"
+      - "Security best practices"
+      - "Q&A session"
+    sold_out: false
+  - product_id: services2
     name: "Lightning Node Setup"
     description: "Remote assistance in setting up your own Lightning Network node"
     price: 199.99
     image: "/assets/images/products/lightning-setup.jpg"
     duration: "Up to 3 hours"
     format: "Remote assistance"
-    includes: ["Hardware recommendation", "Software installation", "Channel opening guidance", "Basic operation training"]
-    sold_out: true
+    includes: 
+      - "Hardware recommendation"
+      - "Software installation"
+      - "Channel opening guidance"
+      - "Basic operation training"
+    sold_out: false
