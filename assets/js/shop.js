@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', function() {
             const productId = this.dataset.id;
             const quantityInput = this.parentElement.querySelector('.quantity-input');
-            const quantity = parseInt(quantityInput.value);
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
             let product;
 
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function addToCart(product, quantity) {
+    function addToCart(product, quantity = 1) {
         if (product && !product.sold_out) {
             const existingItem = cart.find(item => item.id === product.id);
             if (existingItem) {
