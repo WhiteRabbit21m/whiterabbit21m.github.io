@@ -1,6 +1,6 @@
 ---
 layout: product
-id: services1
+product_id: services1
 name: "Bitcoin Consultation"
 description: "One-hour personal consultation on Bitcoin investment strategies"
 price: 99.99
