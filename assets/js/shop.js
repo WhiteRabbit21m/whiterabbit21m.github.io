@@ -218,10 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function createBTCPayInvoice(customerData) {
-        const btcPayServerUrl = 'https://btcpay.whiterabbit21m.com';
-        const storeId = '5vHj4TmiyYMCkFUpyBYf6rUDvaJ6YA7B74v2G7iYD9D2';
-        const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxx'; //ADD YOUR APY
-
         const shopPath = '/shop/';
         const fullShopUrl = new URL(shopPath, window.location.origin).toString();
         const redirectUrlWithClearCart = `${fullShopUrl}?clearCart=true`;
@@ -266,18 +262,17 @@ Country: ${customerData.country}
         console.log('Sending invoice data:', JSON.stringify(invoiceData, null, 2));
 
         try {
-            const response = await fetch(`${btcPayServerUrl}/api/v1/stores/${storeId}/invoices`, {
+            const response = await fetch('https://www.whiterabbit21m.org/api/create-invoice', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `token ${apiKey}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(invoiceData),
             });
 
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(`BTCPay Server responded with status ${response.status}: ${errorText}`);
+                throw new Error(`Server responded with status ${response.status}: ${errorText}`);
             }
 
             const invoice = await response.json();
@@ -286,7 +281,7 @@ Country: ${customerData.country}
             if (invoice.checkoutLink) {
                 return { checkoutLink: invoice.checkoutLink };
             } else {
-                throw new Error('Checkout link not found in BTCPay Server response');
+                throw new Error('Checkout link not found in server response');
             }
         } catch (error) {
             console.error('Error in createBTCPayInvoice:', error);
