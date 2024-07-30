@@ -135,28 +135,43 @@ Useremo Bitcoin Core (il client software open-source ufficiale di Bitcoin) come 
 5. Configura il software del tuo nodo Bitcoin come preferisci. Un generatore di file di configurazione ospitato [qui](https://jlopp.github.io/bitcoin-core-config-generator/) rende molto facile personalizzare la tua configurazione.
 6. Avvia (o riavvia) il daemon Bitcoin e attendi fino al completamento del download iniziale dei blocchi (IBD). Questo richiede ore o giorni, a seconda del tuo computer e della connessione internet. Il progresso viene mostrato sull'interfaccia grafica di Bitcoin, quindi saprai quando è completo.
 
-```wget https://bitcoincore.org/bin/bitcoin-core-25.0/bitcoin-25.0-x86_64-linux-gnu.tar.gz```
-   
-
 In alternativa, un utente più avanzato potrebbe clonare direttamente il repository del software su github.com/bitcoin e compilare il software. Tuttavia, confidiamo che tali utenti avanzati non abbiano bisogno di spiegazioni (tramite questa guida) e possano scoprire i dettagli da soli.
 
-# bitcoin.conf
+## Download del software degli hash e delle firme degli hash
+```
+wget https://bitcoincore.org/bin/bitcoin-core-27.1/bitcoin-27.1-x86_64-linux-gnu.tar.gz
+```   
+```
+wget https://bitcoincore.org/bin/bitcoin-core-27.1/SHA256SUMS
+```
+```
+wget https://bitcoincore.org/bin/bitcoin-core-27.1/SHA256SUMS.asc
+```
+```
+git clone https://github.com/bitcoin-core/guix.sigs
+```
+```
+gpg --import guix.sigs/builder-keys/*
+```
+```
+sha256sum --ignore-missing --check SHA256SUMS
+bitcoin-25.0-x86_64-linux-gnu.tar.gz: OK
+```
+```
+gpg --verify SHA256SUMS.asc
+Il comando precedente restituirà una serie di controlli della firma per ciascuna delle chiavi pubbliche che hanno firmato i checksum. Ogni firma valida mostrerà il seguente testo:
 
-# Configurazione di rete
-listen=1
-server=1
-maxconnections=40
+    A line that starts with: gpg: Good signature
 
-# Configurazione RPC
-rpcuser=myusername
-rpcpassword=mypassword
-rpcallowip=127.0.0.1
+    A complete line saying: Primary key fingerprint: E777 299F C265 DD04 7930  70EB 944D 35F9 AC3D B76A
+```
+```
+tar xzf bitcoin-27.1-x86_64-linux-gnu.tar.gz
+```
+```
+sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-27.1/bin/*
+```
+```
+bitcoind --version
+```
 
-# Altre impostazioni
-txindex=1
-datadir=/path/to/bitcoin/data
-
-def start_bitcoin_node():
-    import subprocess
-    subprocess.run(["bitcoind", "-daemon"])
-    print("Nodo Bitcoin avviato!")
