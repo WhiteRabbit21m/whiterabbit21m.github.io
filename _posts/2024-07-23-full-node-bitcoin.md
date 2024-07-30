@@ -139,3 +139,24 @@ Useremo Bitcoin Core (il client software open-source ufficiale di Bitcoin) come 
    
 
 In alternativa, un utente più avanzato potrebbe clonare direttamente il repository del software su github.com/bitcoin e compilare il software. Tuttavia, confidiamo che tali utenti avanzati non abbiano bisogno di spiegazioni (tramite questa guida) e possano scoprire i dettagli da soli.
+
+# bitcoin.conf
+
+# Configurazione di rete
+listen=1
+server=1
+maxconnections=40
+
+# Configurazione RPC
+rpcuser=myusername
+rpcpassword=mypassword
+rpcallowip=127.0.0.1
+
+# Altre impostazioni
+txindex=1
+datadir=/path/to/bitcoin/data
+
+def start_bitcoin_node():
+    import subprocess
+    subprocess.run(["bitcoind", "-daemon"])
+    print("Nodo Bitcoin avviato!")
