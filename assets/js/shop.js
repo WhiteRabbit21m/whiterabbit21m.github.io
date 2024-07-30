@@ -217,6 +217,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function getToken() {
+        try {
+            const response = await fetch('https://www.whiterabbit21m.org/api/generate-token', {
+                method: 'POST'
+            });
+            if (!response.ok) {
+                throw new Error('Failed to generate token');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error generating token:', error);
+            throw error;
+        }
+    }
+
     async function createBTCPayInvoice(customerData) {
         const shopPath = '/shop/';
         const fullShopUrl = new URL(shopPath, window.location.origin).toString();
@@ -262,10 +277,14 @@ Country: ${customerData.country}
         console.log('Sending invoice data:', JSON.stringify(invoiceData, null, 2));
 
         try {
+            const { token, timestamp } = await getToken();
+
             const response = await fetch('https://www.whiterabbit21m.org/api/create-invoice', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-API-Token': token,
+                    'X-Timestamp': timestamp
                 },
                 body: JSON.stringify(invoiceData),
             });
