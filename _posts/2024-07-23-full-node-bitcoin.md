@@ -137,7 +137,6 @@ Useremo Bitcoin Core (il client software open-source ufficiale di Bitcoin) come 
 
 In alternativa, un utente più avanzato potrebbe clonare direttamente il repository del software su github.com/bitcoin e compilare il software. Tuttavia, confidiamo che tali utenti avanzati non abbiano bisogno di spiegazioni (tramite questa guida) e possano scoprire i dettagli da soli.
 
-## Download del software degli hash e delle firme degli hash
 ```
 wget https://bitcoincore.org/bin/bitcoin-core-27.1/bitcoin-27.1-x86_64-linux-gnu.tar.gz
 ```   
@@ -155,15 +154,9 @@ gpg --import guix.sigs/builder-keys/*
 ```
 ```
 sha256sum --ignore-missing --check SHA256SUMS
-bitcoin-25.0-x86_64-linux-gnu.tar.gz: OK
 ```
 ```
 gpg --verify SHA256SUMS.asc
-Il comando precedente restituirà una serie di controlli della firma per ciascuna delle chiavi pubbliche che hanno firmato i checksum. Ogni firma valida mostrerà il seguente testo:
-
-    A line that starts with: gpg: Good signature
-
-    A complete line saying: Primary key fingerprint: E777 299F C265 DD04 7930  70EB 944D 35F9 AC3D B76A
 ```
 ```
 tar xzf bitcoin-27.1-x86_64-linux-gnu.tar.gz
@@ -173,5 +166,8 @@ sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-27.1/bin/*
 ```
 ```
 bitcoind --version
+```
+```
+bitcoind -daemon
 ```
 
