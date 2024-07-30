@@ -135,39 +135,86 @@ Useremo Bitcoin Core (il client software open-source ufficiale di Bitcoin) come 
 5. Configura il software del tuo nodo Bitcoin come preferisci. Un generatore di file di configurazione ospitato [qui](https://jlopp.github.io/bitcoin-core-config-generator/) rende molto facile personalizzare la tua configurazione.
 6. Avvia (o riavvia) il daemon Bitcoin e attendi fino al completamento del download iniziale dei blocchi (IBD). Questo richiede ore o giorni, a seconda del tuo computer e della connessione internet. Il progresso viene mostrato sull'interfaccia grafica di Bitcoin, quindi saprai quando è completo.
 
-In alternativa, un utente più avanzato potrebbe clonare direttamente il repository del software su github.com/bitcoin e compilare il software. Tuttavia, confidiamo che tali utenti avanzati non abbiano bisogno di spiegazioni (tramite questa guida) e possano scoprire i dettagli da soli.
+# Cos'è Bitcoin Core?
 
-```
-wget https://bitcoincore.org/bin/bitcoin-core-27.1/bitcoin-27.1-x86_64-linux-gnu.tar.gz
-```   
-```
-wget https://bitcoincore.org/bin/bitcoin-core-27.1/SHA256SUMS
-```
-```
-wget https://bitcoincore.org/bin/bitcoin-core-27.1/SHA256SUMS.asc
-```
-```
-git clone https://github.com/bitcoin-core/guix.sigs
-```
-```
-gpg --import guix.sigs/builder-keys/*
-```
-```
-sha256sum --ignore-missing --check SHA256SUMS
-```
-```
-gpg --verify SHA256SUMS.asc
-```
-```
-tar xzf bitcoin-27.1-x86_64-linux-gnu.tar.gz
-```
-```
-sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-27.1/bin/*
-```
-```
-bitcoind --version
-```
-```
-bitcoind -daemon
-```
+Bitcoin Core è il client software Bitcoin open-source ampiamente utilizzato che è il diretto discendente del software originale di Satoshi Nakamoto. Il suo codice è ospitato su GitHub, e i binari già compilati possono essere trovati sul sito ufficiale di Bitcoin Core.
 
+Bitcoin Core è un'implementazione di nodo completo: scarica e convalida tutte le transazioni e i blocchi Bitcoin, e permette all'utente di partecipare al consenso. È buona norma di iniziare con Bitcoin Core poiché è il client software più popolare e ha molti tutorial di aiuto accessibili, nonostante siano disponibili altre implementazioni compatibili. Inoltre, offre il più alto grado di compatibilità con la rete Bitcoin.
+
+# Come mantenere il tuo nodo Bitcoin sicuro e privato
+
+## Software open-source
+Suggerisco di utilizzare un client software open-source, come Bitcoin Core, in modo che il suo codice possa essere completamente controllato e verificato per garantirne la sicurezza.
+
+## Visibilità del traffico
+Il traffico sulla rete Bitcoin non è criptato, il che significa che se gestisci un nodo Bitcoin, il tuo fornitore di servizi Internet (ISP) sarà in grado di vedere che stai eseguendo un nodo. Tuttavia, puoi stare tranquillo sapendo che non possono alterare le tue transazioni, poiché qualsiasi modifica richiederebbe una nuova firma con la tua chiave privata.
+
+## Migliorare la privacy
+Per mantenere il tuo nodo privato, utilizza TOR (the onion router) per connetterti al mondo esterno. In alternativa, puoi utilizzare una VPN (rete privata virtuale) per nascondere il traffico del tuo nodo, ma tieni presente che molti provider VPN mantengono i log e li consegneranno a terze parti su richiesta.
+
+## Distribuzioni di nodi con privacy integrata
+La maggior parte, se non tutte, le distribuzioni di nodi che abbiamo elencato in precedenza supportano e integrano la connettività TOR. Questo rende anche più facile per te connetterti a un nodo autogestito da Internet.
+
+# TOR vs VPN per nodi Bitcoin: Quale è meglio?
+
+## TL;DR
+
+Sia TOR che VPN possono essere strumenti per migliorare la privacy del tuo nodo Bitcoin, ma funzionano in modo diverso:
+
+### TOR:
+- Sistema in cui i pacchetti di dati sono criptati e passati attraverso più relay, oscurando contenuto e destinazione.
+- Ha due aspetti: il browser web TOR per accedere al "dark web" e il livello di rete criptato usato per vari scopi, inclusa la comunicazione dei nodi Bitcoin.
+- Automaticamente supportato da Bitcoin per la comunicazione dei nodi.
+- Offre un servizio accessibile globalmente ma è lento a causa dei multipli reindirizzamenti ed è vulnerabile agli attacchi DoS/DDoS. I nodi di uscita potrebbero essere monitorati da terze parti.
+
+### VPN:
+- Crea una connessione criptata tra il tuo dispositivo e un server remoto, mascherando l'origine effettiva del tuo traffico.
+- Alcuni provider VPN potrebbero essere regolamentati e potrebbero rilasciare i log degli utenti a terze parti. Potrebbero anche monitorare il tuo traffico.
+- Le VPN dirette sul router di casa, come Tailscale o OpenVPN, sono più sicure poiché non instradano il traffico attraverso server di terze parti.
+
+I tentativi di privacy possono rendere i dati apparentemente più preziosi sia per le autorità che per entità malintenzionate, rendendo più difficile proteggerli. Scegli il tuo strumento con giudizio.
+
+## Analisi dettagliata
+
+Entrambi hanno vantaggi e svantaggi, quindi la scelta è soggettiva e dipende in gran parte dal tuo caso d'uso. Ecco un'analisi più dettagliata:
+
+### TOR: The Onion Router
+
+L'abbreviazione TOR sta per "The Onion Router" (Il Router a Cipolla), che si riferisce al fatto che i pacchetti di rete inviati tramite TOR sono avvolti in crittografia e inviati a più relay prima di raggiungere la loro destinazione. Ciò rende impossibile per i relay vedere il contenuto o la destinazione.
+
+TOR è in realtà due cose separate, entrambe basate sullo stesso fondamento:
+
+1. **Browser web TOR**: Usa uno schema di denominazione unico per identificare pagine o servizi sul cosiddetto "dark web". Poiché questo browser ha poca rilevanza per Bitcoin, non entreremo nei dettagli.
+
+2. **Livello di rete criptato**: Usa lo stesso schema di denominazione per indirizzare nodi e servizi, ma può essere utilizzato più universalmente rispetto alla sola navigazione web interattiva. Molti operatori di nodi Bitcoin decidono di basare la comunicazione del loro nodo su TOR, e Bitcoin stesso è stato programmato per abilitarlo automaticamente.
+
+**Vantaggi di TOR**:
+- Offre un elevato livello di anonimato.
+- Supportato nativamente da Bitcoin.
+- Accessibile globalmente.
+
+**Svantaggi di TOR**:
+- Lento per design a causa dei multipli reindirizzamenti.
+- Soggetto a frequenti attacchi DoS e DDoS.
+- Non così sicuro come si potrebbe pensare, a causa del numero limitato di nodi di uscita.
+
+### VPN: Virtual Private Network
+
+Le VPN stabiliscono un livello di rete criptato crittograficamente tra due endpoint. In molti casi, questo è tra la tua macchina (o telefono cellulare) e un server VPN remoto, spesso in un altro paese.
+
+**Vantaggi delle VPN**:
+- Maschera l'origine del tuo traffico.
+- Generalmente più veloce di TOR.
+
+**Svantaggi delle VPN**:
+- Molti provider VPN potrebbero essere obbligati a rilasciare log alle autorità.
+- Potrebbero spiare il tuo traffico dati.
+
+**VPN per casa**:
+Esistono VPN che collegano il tuo dispositivo mobile al tuo router di casa. Queste sono più sicure da usare perché il traffico non viene instradato direttamente attraverso i server di terze parti. Esempi includono Tailscale o OpenVPN.
+
+### Conclusione
+
+Più cerchi di nascondere i tuoi dati, più terze parti e attori malintenzionati li percepiscono come preziosi. È essenzialmente un gioco infinito del gatto e del topo.
+
+Scegli con saggezza in base alle tue specifiche esigenze di privacy e sicurezza.
