@@ -157,9 +157,7 @@ La maggior parte, se non tutte, le distribuzioni di nodi che abbiamo elencato in
 
 # TOR vs VPN per nodi Bitcoin: Quale è meglio?
 
-## TL;DR
-
-Sia TOR che VPN possono essere strumenti per migliorare la privacy del tuo nodo Bitcoin, ma funzionano in modo diverso:
+## TL;DR Sia TOR che VPN possono essere strumenti per migliorare la privacy del tuo nodo Bitcoin, ma funzionano in modo diverso:
 
 ### TOR:
 - Sistema in cui i pacchetti di dati sono criptati e passati attraverso più relay, oscurando contenuto e destinazione.
