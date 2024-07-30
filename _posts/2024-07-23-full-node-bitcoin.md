@@ -109,3 +109,33 @@ Il nodo di mining svolge le seguenti funzioni:
 6. **Ripetizione del processo**: Il processo si ripete per il blocco successivo.
 
 Nota: Maggiori dettagli sul processo di mining saranno coperti in futuri articoli educativi.
+
+# Come configurare ed eseguire un nodo Bitcoin
+
+Un principiante dovrebbe optare per una delle varie piattaforme aperte create e mantenute dai membri della comunità Bitcoin, alcune delle quali includono hardware dedicato, mentre altre sono basate su software. Ecco una lista selezionata di tali distribuzioni:
+
+* Citadel
+* Nodl
+* Start9
+* Umbrel
+* Raspiblitz
+
+Ognuna di queste soluzioni ha un processo di configurazione facile da seguire e può offrire funzionalità aggiuntive, tra cui BTCPayServer, Electrum e la possibilità di utilizzare protocolli Bitcoin di livello 2 come Lightning e Liquid, dandoti un nodo potente e facile da amministrare.
+
+Gli utenti più avanzati potrebbero voler fare affidamento su qualcosa di diverso dalle distribuzioni di terze parti per il loro software del nodo. Possono scegliere tra diverse implementazioni del software Bitcoin, tra cui Bitcoin Core, Libbitcoin e Bitcoin Knots.
+
+## Configurazione di Bitcoin Core
+
+Useremo Bitcoin Core (il client software open-source ufficiale di Bitcoin) come esempio per delineare il processo di configurazione:
+
+1. Vai su bitcoincore.org e trova la versione che desideri installare.
+2. Scarica l'archivio Bitcoin adatto all'architettura del tuo computer.
+3. Scarica i file degli hash SHA256 e delle firme degli hash e confrontali con l'archivio scaricato. Ci sono istruzioni dettagliate passo-passo su come farlo proprio dove si trovano i file di download. Se le segui, non fallirai.
+4. Estrai l'archivio e installa il software. Il processo esatto dipende dall'architettura del tuo computer e dal sistema operativo, ma anche questo è spiegato molto bene sul sito web di download.
+5. Configura il software del tuo nodo Bitcoin come preferisci. Un generatore di file di configurazione ospitato [qui](https://jlopp.github.io/bitcoin-core-config-generator/) rende molto facile personalizzare la tua configurazione.
+6. Avvia (o riavvia) il daemon Bitcoin e attendi fino al completamento del download iniziale dei blocchi (IBD). Questo richiede ore o giorni, a seconda del tuo computer e della connessione internet. Il progresso viene mostrato sull'interfaccia grafica di Bitcoin, quindi saprai quando è completo.
+
+```wget https://bitcoincore.org/bin/bitcoin-core-25.0/bitcoin-25.0-x86_64-linux-gnu.tar.gz```
+   
+
+In alternativa, un utente più avanzato potrebbe clonare direttamente il repository del software su github.com/bitcoin e compilare il software. Tuttavia, confidiamo che tali utenti avanzati non abbiano bisogno di spiegazioni (tramite questa guida) e possano scoprire i dettagli da soli.
