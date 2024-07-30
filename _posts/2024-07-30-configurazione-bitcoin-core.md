@@ -3,7 +3,7 @@ layout: post
 title: "Configurazione Bitcoin Core"
 date: 2024-07-30
 categories: bitcoin-education
-image: /assets/images/conf-bitcoin-core.png
+image: /assets/images/conf-bitcoin-core.jpg
 ---
 # Guida completa all'installazione e configurazione di un full-node Bitcoin su Ubuntu Server
 
