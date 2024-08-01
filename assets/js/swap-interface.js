@@ -34,6 +34,31 @@ const SwapInterface = () => {
     }
   };
 
+  const renderSwapTypeSelector = () => {
+    return React.createElement(
+      'div',
+      { className: 'swap-type-selector' },
+      React.createElement(
+        'button',
+        {
+          className: `swap-type-button ${swapType === 'submarine' ? 'active' : ''}`,
+          onClick: () => setSwapType('submarine')
+        },
+        React.createElement('i', { className: 'fas fa-arrow-down' }),
+        'On-chain to Lightning'
+      ),
+      React.createElement(
+        'button',
+        {
+          className: `swap-type-button ${swapType === 'reverse' ? 'active' : ''}`,
+          onClick: () => setSwapType('reverse')
+        },
+        React.createElement('i', { className: 'fas fa-arrow-up' }),
+        'Lightning to On-chain'
+      )
+    );
+  };
+
   const renderLightningNodeInfo = () => {
     return React.createElement(
       'div',
@@ -64,15 +89,7 @@ const SwapInterface = () => {
     'div',
     null,
     React.createElement('h2', null, 'Initiate Swap'),
-    React.createElement(
-      'select',
-      {
-        value: swapType,
-        onChange: (e) => setSwapType(e.target.value),
-      },
-      React.createElement('option', { value: 'submarine' }, 'On-chain to Lightning'),
-      React.createElement('option', { value: 'reverse' }, 'Lightning to On-chain')
-    ),
+    renderSwapTypeSelector(),
     React.createElement('input', {
       type: 'number',
       value: amount,
