@@ -27,7 +27,7 @@ $card-bg-color: #1E1E1E;
   }
 
   .payments-accepted {
-    margin-bottom: 15px;
+    margin-bottom: 30px; // Aumentato da 15px a 30px
 
     p {
       font-weight: bold;
@@ -39,7 +39,7 @@ $card-bg-color: #1E1E1E;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px; // Aumentato da 15px a 20px
   }
 
   .payment-icon {
@@ -48,10 +48,16 @@ $card-bg-color: #1E1E1E;
     margin: 0 10px;
   }
 
+  .footer-email,
+  .footer-made-by {
+    margin-bottom: 10px; // Aggiunto per garantire una spaziatura uniforme
+  }
+
   .social-icons {
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
+    margin-top: 15px; // Aggiunto per bilanciare lo spazio
 
     a {
       color: $text-color;
@@ -81,6 +87,10 @@ $card-bg-color: #1E1E1E;
       width: 25px;
       height: 25px;
       margin: 0 5px;
+    }
+
+    .payments-accepted {
+      margin-bottom: 25px; // Leggermente ridotto per schermi più piccoli
     }
   }
 }
