@@ -17,4 +17,4 @@ Use our service to swap between Bitcoin on-chain and Lightning Network quickly a
 
 Please note that all swaps are subject to our terms of service and include a small fee.
 
-<div id="swap-interface"></div>
+<div id="swapInterface"></div>
