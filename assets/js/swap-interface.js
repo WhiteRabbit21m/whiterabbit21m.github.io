@@ -100,12 +100,19 @@ const SwapInterface = () => {
     null,
     React.createElement('h2', null, 'Initiate Swap'),
     renderSwapTypeSelector(),
-    React.createElement('input', {
-      type: 'number',
-      value: amount,
-      onChange: (e) => setAmount(e.target.value),
-      placeholder: 'Amount in BTC',
-    }),
+    React.createElement(
+      'div',
+      { className: 'amount-input-container' },
+      React.createElement('input', {
+        type: 'number',
+        value: amount,
+        onChange: (e) => setAmount(e.target.value),
+        placeholder: 'Amount in BTC',
+        step: 'any',
+        min: '0'
+      }),
+      React.createElement('span', { className: 'amount-example' }, 'Example: 0.001 BTC')
+    ),
     React.createElement(
       'button',
       { onClick: initiateSwap },
