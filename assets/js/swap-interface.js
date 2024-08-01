@@ -98,17 +98,11 @@ const SwapInterface = () => {
         React.createElement('li', null, 
           'Check popular Lightning nodes on ',
           React.createElement('a', 
-            { href: 'https://1ml.com/', target: '_blank', rel: 'noopener noreferrer' },
-            '1ML'
+            { href: 'https://mempool.space/lightning', target: '_blank', rel: 'noopener noreferrer' },
+            'mempool.space'
           )
         ),
-        React.createElement('li', null, 
-          'Open channels with well-connected nodes using ',
-          React.createElement('a', 
-            { href: 'https://lightningnetwork.plus/', target: '_blank', rel: 'noopener noreferrer' },
-            'Lightning Network+'
-          )
-        ),
+        React.createElement('li', null, 'Open channels with well-connected nodes to improve your network connectivity'),
         React.createElement('li', null, 'Keep your channels balanced for optimal liquidity')
       )
     );
