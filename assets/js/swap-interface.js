@@ -39,11 +39,23 @@ const SwapInterface = () => {
       'div',
       { className: 'lightning-node-info' },
       React.createElement('h3', null, 'Improve Swap Reliability'),
-      React.createElement('p', null, 'For better swap performance, consider opening a direct Lightning channel with Boltz:'),
+      React.createElement('p', null, 'For better swap performance, consider the following:'),
       React.createElement('ul', null,
         React.createElement('li', null, 
-          React.createElement('a', { href: 'https://lightningnetwork.plus/nodes/026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2', target: '_blank' }, 'Boltz LND Node')
-       )
+          'Check popular Lightning nodes on ',
+          React.createElement('a', 
+            { href: 'https://mempool.space/lightning', target: '_blank', rel: 'noopener noreferrer' },
+            'mempool.space'
+          )
+        ),
+        React.createElement('li', null, 
+          'Open channels with well-connected nodes using ',
+          React.createElement('a', 
+            { href: 'https://lightningnetwork.plus/', target: '_blank', rel: 'noopener noreferrer' },
+            'Lightning Network+'
+          )
+        ),
+        React.createElement('li', null, 'Keep your channels balanced for optimal liquidity')
       )
     );
   };
