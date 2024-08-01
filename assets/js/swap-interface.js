@@ -98,8 +98,8 @@ const SwapInterface = () => {
         React.createElement('li', null, 
           'Check popular Lightning nodes on ',
           React.createElement('a', 
-            { href: 'https://mempool.space/lightning', target: '_blank', rel: 'noopener noreferrer' },
-            'mempool.space'
+            { href: 'https://1ml.com/', target: '_blank', rel: 'noopener noreferrer' },
+            '1ML'
           )
         ),
         React.createElement('li', null, 
