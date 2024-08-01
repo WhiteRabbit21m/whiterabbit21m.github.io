@@ -5,7 +5,7 @@ const SwapInterface = () => {
   const [swapStatus, setSwapStatus] = React.useState('');
   const [error, setError] = React.useState('');
 
-  const MIN_AMOUNT = 0.0001;
+  const MIN_AMOUNT = 0.0005; // Aggiornato per corrispondere al limite di Boltz
   const MAX_AMOUNT = 0.01;
 
   const handleAmountChange = (e) => {
@@ -33,11 +33,14 @@ const SwapInterface = () => {
         body: JSON.stringify({ amount, type: swapType }),
       });
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'An error occurred');
+      }
       setSwapData(data);
       setSwapStatus('Swap initiated. Follow the instructions below.');
     } catch (error) {
       console.error('Error initiating swap:', error);
-      setSwapStatus('Error initiating swap');
+      setError(error.message || 'Error initiating swap');
     }
   };
 
@@ -98,8 +101,8 @@ const SwapInterface = () => {
         React.createElement('li', null, 
           'Check popular Lightning nodes on ',
           React.createElement('a', 
-            { href: 'https://1ml.com', target: '_blank', rel: 'noopener noreferrer' },
-            '1ML'
+            { href: 'https://mempool.space/lightning', target: '_blank', rel: 'noopener noreferrer' },
+            'mempool.space'
           )
         ),
         React.createElement('li', null, 'Open channels with well-connected nodes to improve your network connectivity'),
@@ -121,7 +124,7 @@ const SwapInterface = () => {
         value: amount,
         onChange: handleAmountChange,
         placeholder: 'Amount in BTC',
-        step: '0.00000001',
+        step: '0.0001',
         min: MIN_AMOUNT,
         max: MAX_AMOUNT
       }),
