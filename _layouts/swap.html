@@ -20,14 +20,13 @@ layout: default
 <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 
-<!-- Axios per le chiamate API (opzionale, ma utile) -->
+<!-- Axios per le chiamate API -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!-- Il tuo script personalizzato per l'interfaccia di swap -->
-<script src="{{ '/assets/js/swap-interface.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/swapInterface.js' | relative_url }}"></script>
 
 <script>
-  // Assicurati che il DOM sia completamente caricato prima di renderizzare il componente React
   document.addEventListener('DOMContentLoaded', function() {
     ReactDOM.render(React.createElement(SwapInterface), document.getElementById('swap-interface'));
   });
