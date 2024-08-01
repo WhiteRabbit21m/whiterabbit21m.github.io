@@ -3,8 +3,27 @@ const SwapInterface = () => {
   const [swapType, setSwapType] = React.useState('submarine');
   const [swapData, setSwapData] = React.useState(null);
   const [swapStatus, setSwapStatus] = React.useState('');
+  const [error, setError] = React.useState('');
+
+  const MIN_AMOUNT = 0.0001;
+  const MAX_AMOUNT = 0.01;
+
+  const handleAmountChange = (e) => {
+    const value = e.target.value;
+    setAmount(value);
+    if (value && (parseFloat(value) < MIN_AMOUNT || parseFloat(value) > MAX_AMOUNT)) {
+      setError(`Amount must be between ${MIN_AMOUNT} and ${MAX_AMOUNT} BTC`);
+    } else {
+      setError('');
+    }
+  };
 
   const initiateSwap = async () => {
+    if (!amount || parseFloat(amount) < MIN_AMOUNT || parseFloat(amount) > MAX_AMOUNT) {
+      setError(`Amount must be between ${MIN_AMOUNT} and ${MAX_AMOUNT} BTC`);
+      return;
+    }
+    setError('');
     try {
       const response = await fetch('/api/swap/initiate-swap', {
         method: 'POST',
@@ -106,16 +125,18 @@ const SwapInterface = () => {
       React.createElement('input', {
         type: 'number',
         value: amount,
-        onChange: (e) => setAmount(e.target.value),
+        onChange: handleAmountChange,
         placeholder: 'Amount in BTC',
-        step: 'any',
-        min: '0'
+        step: '0.00000001',
+        min: MIN_AMOUNT,
+        max: MAX_AMOUNT
       }),
-      React.createElement('span', { className: 'amount-example' }, 'Example: 0.001 BTC')
+      React.createElement('span', { className: 'amount-example' }, `Enter amount between ${MIN_AMOUNT} and ${MAX_AMOUNT} BTC`)
     ),
+    error && React.createElement('p', { className: 'error-message' }, error),
     React.createElement(
       'button',
-      { onClick: initiateSwap },
+      { onClick: initiateSwap, disabled: !!error },
       'Initiate Swap'
     ),
     swapData && React.createElement(
