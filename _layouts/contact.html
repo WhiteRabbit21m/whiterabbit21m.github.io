@@ -9,6 +9,12 @@ layout: default
     <div class="contact-content">
       {{ content }}
     </div>
+    <div class="pgp-key-container">
+      <pre class="pgp-key"><code>-----BEGIN PGP PUBLIC KEY BLOCK-----
+... (inserisci qui la tua chiave PGP) ...
+-----END PGP PUBLIC KEY BLOCK-----</code></pre>
+      <button id="copyPgpKey" class="copy-btn">Copy PGP Key</button>
+    </div>
     <div class="contact-form-container">
       <div class="contact-image">
         <img src="/assets/images/contact.png" alt="Immagine di contatto" class="contact-img">
@@ -34,7 +40,6 @@ layout: default
     </div>
   </div>
 </div>
-
 <script>
 document.querySelector('form').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -47,9 +52,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     }
   }).then(response => {
     if (response.ok) {
-      // Salva un flag in sessionStorage
       sessionStorage.setItem('formSubmitted', 'true');
-      // Reindirizza alla pagina di ringraziamento
       window.location.href = '/thanks-email';
     } else {
       throw new Error('Errore nell\'invio del form');
@@ -57,6 +60,18 @@ document.querySelector('form').addEventListener('submit', function(e) {
   }).catch(error => {
     console.error('Errore:', error);
     alert('Si è verificato un errore nell\'invio del messaggio. Per favore, riprova più tardi.');
+  });
+});
+
+document.getElementById('copyPgpKey').addEventListener('click', function() {
+  const pgpKey = document.querySelector('.pgp-key code').textContent;
+  navigator.clipboard.writeText(pgpKey).then(() => {
+    this.textContent = 'Copied!';
+    setTimeout(() => {
+      this.textContent = 'Copy PGP Key';
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy: ', err);
   });
 });
 </script>
