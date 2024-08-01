@@ -8,9 +8,13 @@ layout: default
     </header>
     <div class="swap-content">
       {{ content }}
+      <div id="swap-interface"></div>
     </div>
   </div>
 </div>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <!-- React -->
 <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
@@ -20,7 +24,7 @@ layout: default
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <!-- Il tuo script personalizzato per l'interfaccia di swap -->
-<script src="/assets/js/swap-interface.js"></script>
+<script src="{{ '/assets/js/swap-interface.js' | relative_url }}"></script>
 
 <script>
   // Assicurati che il DOM sia completamente caricato prima di renderizzare il componente React
