@@ -26,6 +26,28 @@ $card-bg-color: #1E1E1E;
     margin-bottom: 15px;
   }
 
+  .payments-accepted {
+    margin-bottom: 15px;
+
+    p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+
+  .payment-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .payment-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+  }
+
   .social-icons {
     display: flex;
     justify-content: center;
@@ -53,6 +75,12 @@ $card-bg-color: #1E1E1E;
   .site-footer {
     .footer-container {
       padding: 0 15px;
+    }
+
+    .payment-icon {
+      width: 25px;
+      height: 25px;
+      margin: 0 5px;
     }
   }
 }
