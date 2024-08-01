@@ -37,24 +37,34 @@ const SwapInterface = () => {
   const renderSwapTypeSelector = () => {
     return React.createElement(
       'div',
-      { className: 'swap-type-selector' },
+      { className: 'swap-type-container' },
+      React.createElement('h3', null, 'Select Swap Type:'),
       React.createElement(
-        'button',
-        {
-          className: `swap-type-button ${swapType === 'submarine' ? 'active' : ''}`,
-          onClick: () => setSwapType('submarine')
-        },
-        React.createElement('i', { className: 'fas fa-arrow-down' }),
-        'On-chain to Lightning'
+        'div',
+        { className: 'swap-type-selector' },
+        React.createElement(
+          'button',
+          {
+            className: `swap-type-button ${swapType === 'submarine' ? 'active' : ''}`,
+            onClick: () => setSwapType('submarine')
+          },
+          React.createElement('i', { className: 'fas fa-arrow-down' }),
+          'On-chain to Lightning'
+        ),
+        React.createElement(
+          'button',
+          {
+            className: `swap-type-button ${swapType === 'reverse' ? 'active' : ''}`,
+            onClick: () => setSwapType('reverse')
+          },
+          React.createElement('i', { className: 'fas fa-arrow-up' }),
+          'Lightning to On-chain'
+        )
       ),
       React.createElement(
-        'button',
-        {
-          className: `swap-type-button ${swapType === 'reverse' ? 'active' : ''}`,
-          onClick: () => setSwapType('reverse')
-        },
-        React.createElement('i', { className: 'fas fa-arrow-up' }),
-        'Lightning to On-chain'
+        'div',
+        { className: 'swap-type-indicator' },
+        swapType === 'submarine' ? 'On-chain → Lightning' : 'Lightning → On-chain'
       )
     );
   };
