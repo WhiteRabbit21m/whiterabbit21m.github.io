@@ -137,6 +137,20 @@ $card-bg-color: #1E1E1E;
       }
     }
   }
+
+  .privacy-notice {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: rgba($card-bg-color, 0.5);
+    border-radius: 8px;
+    text-align: center;
+
+    p {
+      color: rgba($text-color-light, 0.8);
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+  }
 }
 
 // Media query per la responsività
@@ -157,6 +171,14 @@ $card-bg-color: #1E1E1E;
     }
     .copy-btn {
       font-size: 10px;
+    }
+    .privacy-notice {
+      margin-top: 20px;
+      padding: 10px;
+
+      p {
+        font-size: 0.8em;
+      }
     }
   }
 }
