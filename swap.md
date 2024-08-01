@@ -16,4 +16,4 @@ Please note that all swaps are subject to our terms of service and include a sma
 
 For more reliable swaps, we recommend opening a direct Lightning channel with Boltz:
 
-- Mainnet: [LND](https://bolt.observer/node/026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2)
+- Mainnet: [LND](https://lightningnetwork.plus/nodes/026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2)
