@@ -8,17 +8,14 @@ $card-bg-color: #1E1E1E;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-
   h1, h2 {
     color: $accent-color;
     margin-bottom: 20px;
   }
-
   p {
     margin-bottom: 15px;
     color: $text-color;
   }
-
   ul {
     margin-bottom: 20px;
     padding-left: 20px;
@@ -39,7 +36,6 @@ $card-bg-color: #1E1E1E;
 .btcpay-logo {
   text-align: left; // Aligned to the left
   margin-bottom: 20px;
-
   img {
     max-width: 200px;
     height: auto;
@@ -53,14 +49,12 @@ $card-bg-color: #1E1E1E;
 
 .form-group {
   margin-bottom: 20px;
-
   label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
     color: $text-color;
   }
-
   .form-control {
     width: 100%;
     padding: 12px;
@@ -70,10 +64,19 @@ $card-bg-color: #1E1E1E;
     color: $text-color;
     font-size: 16px;
     transition: border-color 0.3s ease;
-
     &:focus {
       outline: none;
       border-color: $accent-color;
+    }
+    
+    // Nasconde le freccette per il campo numerico sui browser desktop
+    &[type="number"] {
+      -moz-appearance: textfield;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
   }
 }
@@ -92,12 +95,10 @@ $card-bg-color: #1E1E1E;
   cursor: pointer;
   text-align: center;
   width: 100%;
-
   &:hover, &:focus {
     background-color: darken($accent-color, 10%);
     transform: translateY(-2px);
   }
-
   &:active {
     transform: translateY(0);
   }
@@ -108,20 +109,16 @@ $card-bg-color: #1E1E1E;
   padding: 25px;
   border-radius: 8px;
   margin-top: 40px;
-
   h2 {
     color: $text-color;
     margin-bottom: 15px;
   }
-
   p, ul {
     color: $text-color;
   }
-
   a {
     color: $accent-color;
     text-decoration: none;
-
     &:hover {
       text-decoration: underline;
     }
