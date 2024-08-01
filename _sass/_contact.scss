@@ -123,6 +123,20 @@ $card-bg-color: #1E1E1E;
         min-height: 100px;
       }
     }
+    .privacy-notice {
+      margin: 20px 0;
+      padding: 10px;
+      background-color: rgba($card-bg-color, 0.5);
+      border-radius: 4px;
+      text-align: left;
+
+      p {
+        color: rgba($text-color-light, 0.8);
+        font-size: 0.85em;
+        line-height: 1.4;
+        margin: 0;
+      }
+    }
     .submit-btn {
       background-color: $accent-color;
       color: $text-color-light;
@@ -135,20 +149,6 @@ $card-bg-color: #1E1E1E;
       &:hover {
         background-color: darken($accent-color, 10%);
       }
-    }
-  }
-
-  .privacy-notice {
-    margin-top: 30px;
-    padding: 15px;
-    background-color: rgba($card-bg-color, 0.5);
-    border-radius: 8px;
-    text-align: center;
-
-    p {
-      color: rgba($text-color-light, 0.8);
-      font-size: 0.9em;
-      line-height: 1.5;
     }
   }
 }
@@ -172,12 +172,12 @@ $card-bg-color: #1E1E1E;
     .copy-btn {
       font-size: 10px;
     }
-    .privacy-notice {
-      margin-top: 20px;
-      padding: 10px;
-
-      p {
-        font-size: 0.8em;
+    .contact-form {
+      .privacy-notice {
+        padding: 8px;
+        p {
+          font-size: 0.8em;
+        }
       }
     }
   }
