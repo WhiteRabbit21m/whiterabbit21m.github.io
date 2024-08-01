@@ -42,11 +42,8 @@ const SwapInterface = () => {
       React.createElement('p', null, 'For better swap performance, consider opening a direct Lightning channel with Boltz:'),
       React.createElement('ul', null,
         React.createElement('li', null, 
-          React.createElement('a', { href: 'https://bolt.observer/node/026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2', target: '_blank' }, 'Boltz LND Node')
-        ),
-        React.createElement('li', null, 
-          React.createElement('a', { href: 'https://bolt.observer/node/023e4a8cb19e9dc22d6b8fcda5d9b2b7bf72a9ff5d874205aaeca34448eb7f1bb9', target: '_blank' }, 'Boltz CLN Node')
-        )
+          React.createElement('a', { href: 'https://lightningnetwork.plus/nodes/026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2', target: '_blank' }, 'Boltz LND Node')
+       )
       )
     );
   };
