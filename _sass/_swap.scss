@@ -8,17 +8,14 @@ $card-bg-color: #1E1E1E;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  
   h1, h2 {
     color: $accent-color;
     margin-bottom: 20px;
   }
-  
   p {
     margin-bottom: 15px;
     color: $text-color;
   }
-  
   ul {
     margin-bottom: 20px;
     padding-left: 20px;
@@ -34,25 +31,26 @@ $card-bg-color: #1E1E1E;
   max-width: 400px;
   margin: 0 0 40px; // Aligned to the left
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  select, input, button {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    background-color: #2C2C2C;
-    color: $text-color;
-    font-size: 16px;
-    margin-bottom: 20px;
-    transition: border-color 0.3s ease;
-
-    &:focus {
-      outline: none;
-      border-color: $accent-color;
-    }
+#swap-form select,
+#swap-form input,
+#swap-form button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #2C2C2C;
+  color: $text-color;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  &:focus {
+    outline: none;
+    border-color: $accent-color;
   }
-
-  input[type="number"] {
+  
+  // Nasconde le freccette per il campo numerico sui browser desktop
+  &[type="number"] {
     -moz-appearance: textfield;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -67,37 +65,21 @@ $card-bg-color: #1E1E1E;
   border-radius: 8px;
   padding: 25px;
   margin-top: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: $text-color;
 }
 
 #fee-info {
   text-align: center;
   margin-top: 20px;
   font-weight: bold;
-  color: $text-color;
 }
 
 #lnurl-payment {
   display: none;
-  background-color: $card-bg-color;
-  border-radius: 8px;
-  padding: 25px;
-  margin-top: 40px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  h2 {
-    color: $text-color;
-    margin-bottom: 15px;
-  }
+  text-align: center;
+  margin-top: 20px;
 
   #lnurl-qr {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  p {
-    color: $text-color;
+    margin-bottom: 10px;
   }
 }
 
@@ -115,12 +97,10 @@ $card-bg-color: #1E1E1E;
   cursor: pointer;
   text-align: center;
   width: 100%;
-
   &:hover, &:focus {
     background-color: darken($accent-color, 10%);
     transform: translateY(-2px);
   }
-
   &:active {
     transform: translateY(0);
   }
@@ -131,16 +111,13 @@ $card-bg-color: #1E1E1E;
   padding: 25px;
   border-radius: 8px;
   margin-top: 40px;
-
   h2 {
     color: $text-color;
     margin-bottom: 15px;
   }
-
   p, ul {
     color: $text-color;
   }
-
   a {
     color: $accent-color;
     text-decoration: none;
@@ -152,9 +129,6 @@ $card-bg-color: #1E1E1E;
 
 @media (max-width: 480px) {
   #swap-form,
-  #quote-result,
-  #swap-result,
-  #lnurl-payment,
   .lightning-info {
     padding: 20px;
   }
