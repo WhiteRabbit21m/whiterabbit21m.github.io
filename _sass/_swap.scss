@@ -1,72 +1,164 @@
+// Variables
+$accent-color: #4CAF50;
+$text-color: #ffffff;
+$card-bg-color: #1E1E1E;
+$input-bg-color: #2C2C2C;
+$border-color: #333;
+
+// Styles
 .swap-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  
-  h1 {
-    text-align: center;
-    color: #333;
+  color: $text-color;
+
+  h1, h2 {
+    color: $accent-color;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 15px;
   }
 }
 
 #swap-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 0 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   select, input, button {
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $input-bg-color;
+    color: $text-color;
     font-size: 16px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+    }
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 
   button {
-    background-color: #007bff;
-    color: white;
+    background-color: $accent-color;
     border: none;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 
-    &:hover {
-      background-color: #0056b3;
+    &:hover, &:focus {
+      background-color: darken($accent-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }
 
 #quote-result, #swap-result {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  padding: 15px;
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
   margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    color: $accent-color;
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  button {
+    @extend .cta-button;
+  }
 }
 
 #fee-info {
   text-align: center;
   margin-top: 20px;
   font-weight: bold;
+  color: $text-color;
 }
 
 #lnurl-payment {
-  display: none;
-  text-align: center;
-  margin-top: 20px;
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-  #lnurl-qr {
-    margin-bottom: 10px;
+  h2 {
+    color: $accent-color;
+    margin-bottom: 15px;
   }
 
-  button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  #lnurl-qr {
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
-    &:hover {
-      background-color: #218838;
-    }
+  p {
+    margin-bottom: 15px;
+  }
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: $accent-color;
+  color: $text-color;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+
+  &:hover, &:focus {
+    background-color: darken($accent-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  #swap-form,
+  #quote-result,
+  #swap-result,
+  #lnurl-payment {
+    padding: 20px;
+  }
+
+  .cta-button {
+    padding: 12px 24px;
   }
 }
