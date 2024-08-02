@@ -1,3 +1,7 @@
+// Importazioni necessarie
+import { ECPairFactory } from 'ecpair';
+import * as ecc from 'tiny-secp256k1';
+
 const BOLTZ_API_URL = 'https://api.boltz.exchange/v2';
 const SERVICE_FEE_PERCENTAGE = 0.005; // 0.5%
 const LNURL_PAY = 'LNURL1DP68GURN8GHJ7V33D5H8G6TSWVHJUAM9D3KZ66MWDAMKUTMVDE6HYMRS9UC8SVFSXSUN2CEJVG6RGVPKVSCRQESUVXT0J';
@@ -93,8 +97,7 @@ async function confirmSwap() {
     }
 
     try {
-        // Fetch the most recent pair data
-        await fetchPairData();
+        await fetchPairData(); // Refresh pair data before confirming swap
         
         const preimageHash = await generatePreimageHash();
         const publicKeyHex = await generatePublicKey();
@@ -107,7 +110,7 @@ async function confirmSwap() {
             [swapEndpoint === 'submarine' ? 'amount' : 'invoiceAmount']: currentQuote.amount,
             preimageHash: preimageHash,
             [swapEndpoint === 'submarine' ? 'refundPublicKey' : 'claimPublicKey']: publicKeyHex,
-            pairHash: pairData.hash // Use the most recent pair hash
+            pairHash: pairData.hash
         };
 
         console.log('Sending request to Boltz API:', requestBody);
@@ -122,12 +125,6 @@ async function confirmSwap() {
 
         if (!swapResponse.ok) {
             const errorData = await swapResponse.json();
-            if (errorData.error === 'invalid pair hash') {
-                // If the pair hash is invalid, fetch new pair data and try again
-                await fetchPairData();
-                requestBody.pairHash = pairData.hash;
-                return await retrySwapRequest(swapEndpoint, requestBody);
-            }
             throw new Error(`API error: ${errorData.error || 'Unknown error'}`);
         }
 
@@ -142,31 +139,6 @@ async function confirmSwap() {
     } catch (error) {
         console.error('Error confirming swap:', error);
         alert(`Error confirming swap: ${error.message}`);
-    }
-}
-
-async function retrySwapRequest(swapEndpoint, requestBody) {
-    console.log('Retrying swap request with updated pair hash:', requestBody);
-    const retryResponse = await fetch(`${BOLTZ_API_URL}/swap/${swapEndpoint}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-    });
-
-    if (!retryResponse.ok) {
-        const errorData = await retryResponse.json();
-        throw new Error(`API error on retry: ${errorData.error || 'Unknown error'}`);
-    }
-
-    const swapData = await retryResponse.json();
-
-    if (swapData.id) {
-        displaySwapInstructions(swapData);
-        displayLnurlPayment();
-    } else {
-        alert('Error creating swap on retry. Please try again.');
     }
 }
 
@@ -211,16 +183,7 @@ async function generatePreimageHash() {
 }
 
 async function generatePublicKey() {
-    const keyPair = await window.crypto.subtle.generateKey(
-        {
-            name: 'ECDSA',
-            namedCurve: 'P-256'
-        },
-        true,
-        ['sign', 'verify']
-    );
-    const publicKey = await window.crypto.subtle.exportKey('raw', keyPair.publicKey);
-    return Array.from(new Uint8Array(publicKey))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
+    const ECPair = ECPairFactory(ecc);
+    const keyPair = ECPair.makeRandom();
+    return keyPair.publicKey.toString('hex');
 }
