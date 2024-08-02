@@ -35,15 +35,15 @@ async function getQuote() {
         const boltzFee = fees.percentage / 100;
         const serviceFee = SERVICE_FEE_PERCENTAGE;
 
-        const amountAfterFee = amount * (1 - boltzFee - serviceFee);
+        const amountAfterFee = parseInt(amount) * (1 - boltzFee - serviceFee);
         const estimatedReceiveAmount = Math.floor(amountAfterFee * rate);
 
         currentQuote = {
             swapType,
-            amount,
+            amount: parseInt(amount),
             estimatedReceiveAmount,
-            serviceFeeAmount: Math.floor(amount * serviceFee),
-            boltzFeeAmount: Math.floor(amount * boltzFee),
+            serviceFeeAmount: Math.floor(parseInt(amount) * serviceFee),
+            boltzFeeAmount: Math.floor(parseInt(amount) * boltzFee),
             pairHash: pairData.hash
         };
 
@@ -80,20 +80,40 @@ async function confirmSwap() {
         const publicKeyHex = await generatePublicKey();
 
         const swapEndpoint = currentQuote.swapType === 'BTC-LN' ? 'submarine' : 'reverse';
+        
+        let requestBody;
+        if (swapEndpoint === 'submarine') {
+            requestBody = {
+                from: 'BTC',
+                to: 'BTC',
+                amount: currentQuote.amount,
+                preimageHash: preimageHash,
+                refundPublicKey: publicKeyHex,
+                pairHash: currentQuote.pairHash
+            };
+        } else {
+            requestBody = {
+                from: 'BTC',
+                to: 'BTC',
+                invoiceAmount: currentQuote.amount,
+                preimageHash: preimageHash,
+                claimPublicKey: publicKeyHex,
+                pairHash: currentQuote.pairHash
+            };
+        }
+
         const swapResponse = await fetch(`${BOLTZ_API_URL}/swap/${swapEndpoint}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                from: 'BTC',
-                to: 'BTC',
-                amount: parseFloat(currentQuote.amount),
-                preimageHash: preimageHash,
-                refundPublicKey: publicKeyHex,
-                pairHash: currentQuote.pairHash
-            }),
+            body: JSON.stringify(requestBody),
         });
+
+        if (!swapResponse.ok) {
+            const errorData = await swapResponse.json();
+            throw new Error(`API error: ${errorData.error || 'Unknown error'}`);
+        }
 
         const swapData = await swapResponse.json();
 
@@ -105,7 +125,7 @@ async function confirmSwap() {
         }
     } catch (error) {
         console.error('Error confirming swap:', error);
-        alert('Error confirming swap. Please try again.');
+        alert(`Error confirming swap: ${error.message}`);
     }
 }
 
@@ -141,7 +161,6 @@ async function payWithLnurl() {
     }, 5000);
 }
 
-// Helper functions for key generation (not secure for production use)
 async function generatePreimageHash() {
     const preimage = crypto.getRandomValues(new Uint8Array(32));
     const preimageHash = await crypto.subtle.digest('SHA-256', preimage);
