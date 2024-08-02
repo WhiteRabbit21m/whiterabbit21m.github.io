@@ -32,6 +32,8 @@ async function fetchPairData() {
 }
 
 async function getQuote() {
+    await fetchPairData(); // Refresh pair data before getting a quote
+    
     const swapType = document.getElementById('swap-type').value;
     const amount = parseInt(document.getElementById('amount').value);
 
@@ -91,6 +93,8 @@ async function confirmSwap() {
     }
 
     try {
+        await fetchPairData(); // Refresh pair data before confirming swap
+        
         const preimageHash = await generatePreimageHash();
         const publicKeyHex = await generatePublicKey();
 
@@ -104,7 +108,7 @@ async function confirmSwap() {
                 amount: currentQuote.amount,
                 preimageHash: preimageHash,
                 refundPublicKey: publicKeyHex,
-                pairHash: currentQuote.pairHash
+                pairHash: pairData.hash // Use the most recent pair hash
             };
         } else {
             requestBody = {
@@ -113,7 +117,7 @@ async function confirmSwap() {
                 invoiceAmount: currentQuote.amount,
                 preimageHash: preimageHash,
                 claimPublicKey: publicKeyHex,
-                pairHash: currentQuote.pairHash
+                pairHash: pairData.hash // Use the most recent pair hash
             };
         }
 
