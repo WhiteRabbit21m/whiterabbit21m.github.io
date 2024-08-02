@@ -1,97 +1,165 @@
-/* Variables */
-:root {
-    --accent-color: #4CAF50;
-    --text-color: #333333;
-    --bg-color: #FFFFFF;
-    --card-bg-color: #F5F5F5;
-}
+// Variables
+$accent-color: #4CAF50;
+$text-color: #ffffff;
+$card-bg-color: #1E1E1E;
 
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 0;
-}
-
+// Styles
 .swap-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  
+  h1, h2 {
+    color: $accent-color;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin-bottom: 15px;
+    color: $text-color;
+  }
+  
+  ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    color: $text-color;
+  }
 }
 
-h1, h2 {
-    color: var(--accent-color);
-}
-
-/* Swap Form */
 #swap-form {
-    background-color: var(--card-bg-color);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 0 40px; // Aligned to the left
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-#swap-form select,
-#swap-form input,
-#swap-form button {
+  select, input, button {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    border: 1px solid #333;
     border-radius: 4px;
-}
-
-/* CTA Button */
-.cta-button {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    background-color: #45a049;
-}
-
-/* Results */
-#quote-result,
-#swap-result {
-    background-color: var(--card-bg-color);
-    border-radius: 8px;
-    padding: 20px;
+    background-color: #2C2C2C;
+    color: $text-color;
+    font-size: 16px;
     margin-bottom: 20px;
-}
+    transition: border-color 0.3s ease;
 
-/* LNURL Payment */
-#lnurl-payment {
-    display: none;
-    background-color: var(--card-bg-color);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-#lnurl-qr {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Lightning Info */
-.lightning-info {
-    background-color: var(--card-bg-color);
-    border-radius: 8px;
-    padding: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .swap-container {
-        padding: 10px;
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
     }
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+#quote-result, #swap-result {
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: $text-color;
+}
+
+#fee-info {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  color: $text-color;
+}
+
+#lnurl-payment {
+  display: none;
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    color: $text-color;
+    margin-bottom: 15px;
+  }
+
+  #lnurl-qr {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  p {
+    color: $text-color;
+  }
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: $accent-color;
+  color: $text-color;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+
+  &:hover, &:focus {
+    background-color: darken($accent-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.lightning-info {
+  background-color: $card-bg-color;
+  padding: 25px;
+  border-radius: 8px;
+  margin-top: 40px;
+
+  h2 {
+    color: $text-color;
+    margin-bottom: 15px;
+  }
+
+  p, ul {
+    color: $text-color;
+  }
+
+  a {
+    color: $accent-color;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #swap-form,
+  #quote-result,
+  #swap-result,
+  #lnurl-payment,
+  .lightning-info {
+    padding: 20px;
+  }
+  
+  .cta-button {
+    padding: 12px 24px;
+  }
 }
