@@ -16,6 +16,11 @@ async function getQuote() {
     const swapType = document.getElementById('swap-type').value;
     const amount = document.getElementById('amount').value;
 
+    if (!amount || isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid amount.');
+        return;
+    }
+
     try {
         const response = await fetch(`${BOLTZ_API_URL}/swap/${swapType === 'BTC-LN' ? 'submarine' : 'reverse'}`);
         const pairs = await response.json();
@@ -31,14 +36,14 @@ async function getQuote() {
         const serviceFee = SERVICE_FEE_PERCENTAGE;
 
         const amountAfterFee = amount * (1 - boltzFee - serviceFee);
-        const estimatedReceiveAmount = amountAfterFee * rate;
+        const estimatedReceiveAmount = Math.floor(amountAfterFee * rate);
 
         currentQuote = {
             swapType,
             amount,
             estimatedReceiveAmount,
-            serviceFeeAmount: amount * serviceFee,
-            boltzFeeAmount: amount * boltzFee,
+            serviceFeeAmount: Math.floor(amount * serviceFee),
+            boltzFeeAmount: Math.floor(amount * boltzFee),
             pairHash: pairData.hash
         };
 
@@ -55,9 +60,9 @@ function displayQuote(quote) {
         <h2>Swap Quote</h2>
         <p>Type: ${quote.swapType === 'BTC-LN' ? 'Bitcoin to Lightning' : 'Lightning to Bitcoin'}</p>
         <p>Amount: ${quote.amount} satoshis</p>
-        <p>Estimated receive amount: ${quote.estimatedReceiveAmount.toFixed(0)} satoshis</p>
-        <p>Boltz Fee: ${quote.boltzFeeAmount.toFixed(0)} satoshis</p>
-        <p>Service Fee: ${quote.serviceFeeAmount.toFixed(0)} satoshis</p>
+        <p>Estimated receive amount: ${quote.estimatedReceiveAmount} satoshis</p>
+        <p>Boltz Fee: ${quote.boltzFeeAmount} satoshis</p>
+        <p>Service Fee: ${quote.serviceFeeAmount} satoshis</p>
         <button id="confirm-swap" class="cta-button">Confirm Swap</button>
     `;
 
@@ -129,6 +134,11 @@ function displayLnurlPayment() {
 async function payWithLnurl() {
     alert('LNURL payment initiated. Please complete the payment in your Lightning wallet.');
     // In a real implementation, you would need to verify the payment server-side
+    // For now, we'll just simulate a successful payment
+    setTimeout(() => {
+        alert('Payment received! Your swap is now processing.');
+        document.getElementById('lnurl-payment').style.display = 'none';
+    }, 5000);
 }
 
 // Helper functions for key generation (not secure for production use)
