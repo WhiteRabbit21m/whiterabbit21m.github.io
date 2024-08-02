@@ -1,56 +1,67 @@
 // Variables
 $accent-color: #4CAF50;
 $text-color: #ffffff;
+$bg-color: #121212;
 $card-bg-color: #1E1E1E;
+$input-bg-color: #2C2C2C;
+$border-color: #333;
 
-// Styles
+// Global Styles
+body {
+  background-color: $bg-color;
+  color: $text-color;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
 .swap-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+
   h1, h2 {
     color: $accent-color;
     margin-bottom: 20px;
   }
+
   p {
     margin-bottom: 15px;
-    color: $text-color;
   }
+
   ul {
     margin-bottom: 20px;
     padding-left: 20px;
-    color: $text-color;
   }
 }
 
-#swap-form {
+// Swap Interface
+#swap-interface {
   background-color: $card-bg-color;
   border-radius: 8px;
   padding: 25px;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 0 40px; // Aligned to the left
+  margin-bottom: 40px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-#swap-form select,
-#swap-form input,
-#swap-form button {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #333;
-  border-radius: 4px;
-  background-color: #2C2C2C;
-  color: $text-color;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-  &:focus {
-    outline: none;
-    border-color: $accent-color;
+  select, input, button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $input-bg-color;
+    color: $text-color;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+    }
   }
-  
-  // Nasconde le freccette per il campo numerico sui browser desktop
-  &[type="number"] {
+
+  input[type="number"] {
     -moz-appearance: textfield;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -58,82 +69,85 @@ $card-bg-color: #1E1E1E;
       margin: 0;
     }
   }
-}
 
-#quote-result, #swap-result {
-  background-color: $card-bg-color;
-  border-radius: 8px;
-  padding: 25px;
-  margin-top: 20px;
-}
-
-#fee-info {
-  text-align: center;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-#lnurl-payment {
-  display: none;
-  text-align: center;
-  margin-top: 20px;
-
-  #lnurl-qr {
-    margin-bottom: 10px;
-  }
-}
-
-.cta-button {
-  display: inline-block;
-  background-color: $accent-color;
-  color: $text-color;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
-  text-align: center;
-  width: 100%;
-  &:hover, &:focus {
-    background-color: darken($accent-color, 10%);
-    transform: translateY(-2px);
-  }
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-.lightning-info {
-  background-color: $card-bg-color;
-  padding: 25px;
-  border-radius: 8px;
-  margin-top: 40px;
-  h2 {
+  button {
+    background-color: $accent-color;
+    border: none;
     color: $text-color;
-    margin-bottom: 15px;
-  }
-  p, ul {
-    color: $text-color;
-  }
-  a {
-    color: $accent-color;
-    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
     &:hover {
-      text-decoration: underline;
+      background-color: darken($accent-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }
 
-@media (max-width: 480px) {
-  #swap-form,
-  .lightning-info {
-    padding: 20px;
+// Swap Status
+#swap-status {
+  background-color: $card-bg-color;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    color: $accent-color;
+    margin-bottom: 15px;
   }
-  
-  .cta-button {
-    padding: 12px 24px;
+
+  p {
+    margin-bottom: 10px;
   }
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .swap-container {
+    padding: 10px;
+  }
+
+  #swap-interface,
+  #swap-status {
+    padding: 15px;
+  }
+}
+
+// Additional styles for specific elements
+#invoice-input {
+  margin-top: 15px;
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.success-message {
+  color: #4CAF50;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+// Loader for async operations
+.loader {
+  border: 4px solid $input-bg-color;
+  border-top: 4px solid $accent-color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
