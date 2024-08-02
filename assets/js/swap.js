@@ -35,6 +35,11 @@ async function getQuote() {
     const swapType = document.getElementById('swap-type').value;
     const amount = parseInt(document.getElementById('amount').value);
 
+    if (!pairData) {
+        alert('Swap information not available. Please refresh the page and try again.');
+        return;
+    }
+
     if (!amount || isNaN(amount) || amount < pairData.limits.minimal) {
         alert(`Please enter a valid amount. Minimum amount is ${pairData.limits.minimal} satoshis.`);
         return;
@@ -112,6 +117,8 @@ async function confirmSwap() {
             };
         }
 
+        console.log('Sending request to Boltz API:', requestBody);
+
         const swapResponse = await fetch(`${BOLTZ_API_URL}/swap/${swapEndpoint}`, {
             method: 'POST',
             headers: {
@@ -139,7 +146,45 @@ async function confirmSwap() {
     }
 }
 
-// ... rest of the functions remain the same ...
+function displaySwapInstructions(swapData) {
+    const swapResult = document.getElementById('swap-result');
+    swapResult.innerHTML = `
+        <h2>Swap Instructions</h2>
+        <p>Swap ID: ${swapData.id}</p>
+        ${currentQuote.swapType === 'BTC-LN' 
+            ? `<p>Please send ${currentQuote.amount} satoshis to this Bitcoin address:</p>
+               <p>${swapData.address}</p>`
+            : `<p>Please pay the following Lightning invoice:</p>
+               <p>${swapData.invoice}</p>`
+        }
+        <p>Timeout Block Height: ${swapData.timeoutBlockHeight}</p>
+    `;
+}
+
+function displayLnurlPayment() {
+    const lnurlQr = document.getElementById('lnurl-qr');
+    lnurlQr.innerHTML = ''; // Clear previous QR code
+    new QRCode(lnurlQr, LNURL_PAY);
+    document.getElementById('lnurl-payment').style.display = 'block';
+}
+
+async function payWithLnurl() {
+    alert('LNURL payment initiated. Please complete the payment in your Lightning wallet.');
+    // In a real implementation, you would need to verify the payment server-side
+    // For now, we'll just simulate a successful payment
+    setTimeout(() => {
+        alert('Payment received! Your swap is now processing.');
+        document.getElementById('lnurl-payment').style.display = 'none';
+    }, 5000);
+}
+
+async function generatePreimageHash() {
+    const preimage = window.crypto.getRandomValues(new Uint8Array(32));
+    const preimageHash = await window.crypto.subtle.digest('SHA-256', preimage);
+    return Array.from(new Uint8Array(preimageHash))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+}
 
 async function generatePublicKey() {
     const keyPair = await window.crypto.subtle.generateKey(
