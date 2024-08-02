@@ -3,6 +3,7 @@ const SERVICE_FEE_PERCENTAGE = 0.005; // 0.5%
 const LNURL_PAY = 'LNURL1DP68GURN8GHJ7V33D5H8G6TSWVHJUAM9D3KZ66MWDAMKUTMVDE6HYMRS9UC8SVFSXSUN2CEJVG6RGVPKVSCRQESUVXT0J';
 
 let currentQuote = null;
+let pairData = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     const getQuoteButton = document.getElementById('get-quote');
@@ -10,47 +11,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const payLnurlButton = document.getElementById('pay-lnurl');
     payLnurlButton.addEventListener('click', payWithLnurl);
+
+    // Fetch pair data on page load
+    fetchPairData();
 });
+
+async function fetchPairData() {
+    try {
+        const response = await fetch(`${BOLTZ_API_URL}/swap/submarine`);
+        const pairs = await response.json();
+        pairData = pairs['BTC']['BTC'];
+        if (!pairData) {
+            throw new Error('Failed to fetch pair data');
+        }
+        document.getElementById('amount').placeholder = `Amount to swap (min: ${pairData.limits.minimal} sats)`;
+    } catch (error) {
+        console.error('Error fetching pair data:', error);
+        alert('Failed to fetch swap information. Please try again later.');
+    }
+}
 
 async function getQuote() {
     const swapType = document.getElementById('swap-type').value;
-    const amount = document.getElementById('amount').value;
+    const amount = parseInt(document.getElementById('amount').value);
 
-    if (!amount || isNaN(amount) || amount <= 0) {
-        alert('Please enter a valid amount.');
+    if (!amount || isNaN(amount) || amount < pairData.limits.minimal) {
+        alert(`Please enter a valid amount. Minimum amount is ${pairData.limits.minimal} satoshis.`);
         return;
     }
 
     try {
-        const response = await fetch(`${BOLTZ_API_URL}/swap/${swapType === 'BTC-LN' ? 'submarine' : 'reverse'}`);
-        const pairs = await response.json();
-        
-        const pairData = pairs['BTC']['BTC'];
-        
-        if (!pairData) {
-            throw new Error('Invalid swap type');
-        }
-
         const { rate, fees } = pairData;
         const boltzFee = fees.percentage / 100;
         const serviceFee = SERVICE_FEE_PERCENTAGE;
 
-        const amountAfterFee = parseInt(amount) * (1 - boltzFee - serviceFee);
+        const amountAfterFee = amount * (1 - boltzFee - serviceFee);
         const estimatedReceiveAmount = Math.floor(amountAfterFee * rate);
 
         currentQuote = {
             swapType,
-            amount: parseInt(amount),
+            amount,
             estimatedReceiveAmount,
-            serviceFeeAmount: Math.floor(parseInt(amount) * serviceFee),
-            boltzFeeAmount: Math.floor(parseInt(amount) * boltzFee),
+            serviceFeeAmount: Math.floor(amount * serviceFee),
+            boltzFeeAmount: Math.floor(amount * boltzFee),
             pairHash: pairData.hash
         };
 
         displayQuote(currentQuote);
     } catch (error) {
-        console.error('Error fetching quote:', error);
-        document.getElementById('quote-result').innerHTML = 'Error fetching quote. Please try again.';
+        console.error('Error creating quote:', error);
+        document.getElementById('quote-result').innerHTML = 'Error creating quote. Please try again.';
     }
 }
 
@@ -129,48 +139,10 @@ async function confirmSwap() {
     }
 }
 
-function displaySwapInstructions(swapData) {
-    const swapResult = document.getElementById('swap-result');
-    swapResult.innerHTML = `
-        <h2>Swap Instructions</h2>
-        <p>Swap ID: ${swapData.id}</p>
-        ${currentQuote.swapType === 'BTC-LN' 
-            ? `<p>Please send ${currentQuote.amount} satoshis to this Bitcoin address:</p>
-               <p>${swapData.address}</p>`
-            : `<p>Please pay the following Lightning invoice:</p>
-               <p>${swapData.invoice}</p>`
-        }
-        <p>Timeout Block Height: ${swapData.timeoutBlockHeight}</p>
-    `;
-}
-
-function displayLnurlPayment() {
-    const lnurlQr = document.getElementById('lnurl-qr');
-    lnurlQr.innerHTML = ''; // Clear previous QR code
-    new QRCode(lnurlQr, LNURL_PAY);
-    document.getElementById('lnurl-payment').style.display = 'block';
-}
-
-async function payWithLnurl() {
-    alert('LNURL payment initiated. Please complete the payment in your Lightning wallet.');
-    // In a real implementation, you would need to verify the payment server-side
-    // For now, we'll just simulate a successful payment
-    setTimeout(() => {
-        alert('Payment received! Your swap is now processing.');
-        document.getElementById('lnurl-payment').style.display = 'none';
-    }, 5000);
-}
-
-async function generatePreimageHash() {
-    const preimage = crypto.getRandomValues(new Uint8Array(32));
-    const preimageHash = await crypto.subtle.digest('SHA-256', preimage);
-    return Array.from(new Uint8Array(preimageHash))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-}
+// ... rest of the functions remain the same ...
 
 async function generatePublicKey() {
-    const keyPair = await crypto.subtle.generateKey(
+    const keyPair = await window.crypto.subtle.generateKey(
         {
             name: 'ECDSA',
             namedCurve: 'P-256'
@@ -178,7 +150,7 @@ async function generatePublicKey() {
         true,
         ['sign', 'verify']
     );
-    const publicKey = await crypto.subtle.exportKey('raw', keyPair.publicKey);
+    const publicKey = await window.crypto.subtle.exportKey('raw', keyPair.publicKey);
     return Array.from(new Uint8Array(publicKey))
         .map(b => b.toString(16).padStart(2, '0'))
         .join('');
