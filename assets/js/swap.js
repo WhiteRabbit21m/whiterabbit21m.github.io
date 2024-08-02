@@ -93,33 +93,22 @@ async function confirmSwap() {
     }
 
     try {
-        await fetchPairData(); // Refresh pair data before confirming swap
+        // Fetch the most recent pair data
+        await fetchPairData();
         
         const preimageHash = await generatePreimageHash();
         const publicKeyHex = await generatePublicKey();
 
         const swapEndpoint = currentQuote.swapType === 'BTC-LN' ? 'submarine' : 'reverse';
         
-        let requestBody;
-        if (swapEndpoint === 'submarine') {
-            requestBody = {
-                from: 'BTC',
-                to: 'BTC',
-                amount: currentQuote.amount,
-                preimageHash: preimageHash,
-                refundPublicKey: publicKeyHex,
-                pairHash: pairData.hash // Use the most recent pair hash
-            };
-        } else {
-            requestBody = {
-                from: 'BTC',
-                to: 'BTC',
-                invoiceAmount: currentQuote.amount,
-                preimageHash: preimageHash,
-                claimPublicKey: publicKeyHex,
-                pairHash: pairData.hash // Use the most recent pair hash
-            };
-        }
+        let requestBody = {
+            from: 'BTC',
+            to: 'BTC',
+            [swapEndpoint === 'submarine' ? 'amount' : 'invoiceAmount']: currentQuote.amount,
+            preimageHash: preimageHash,
+            [swapEndpoint === 'submarine' ? 'refundPublicKey' : 'claimPublicKey']: publicKeyHex,
+            pairHash: pairData.hash // Use the most recent pair hash
+        };
 
         console.log('Sending request to Boltz API:', requestBody);
 
@@ -133,6 +122,12 @@ async function confirmSwap() {
 
         if (!swapResponse.ok) {
             const errorData = await swapResponse.json();
+            if (errorData.error === 'invalid pair hash') {
+                // If the pair hash is invalid, fetch new pair data and try again
+                await fetchPairData();
+                requestBody.pairHash = pairData.hash;
+                return await retrySwapRequest(swapEndpoint, requestBody);
+            }
             throw new Error(`API error: ${errorData.error || 'Unknown error'}`);
         }
 
@@ -147,6 +142,31 @@ async function confirmSwap() {
     } catch (error) {
         console.error('Error confirming swap:', error);
         alert(`Error confirming swap: ${error.message}`);
+    }
+}
+
+async function retrySwapRequest(swapEndpoint, requestBody) {
+    console.log('Retrying swap request with updated pair hash:', requestBody);
+    const retryResponse = await fetch(`${BOLTZ_API_URL}/swap/${swapEndpoint}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+    });
+
+    if (!retryResponse.ok) {
+        const errorData = await retryResponse.json();
+        throw new Error(`API error on retry: ${errorData.error || 'Unknown error'}`);
+    }
+
+    const swapData = await retryResponse.json();
+
+    if (swapData.id) {
+        displaySwapInstructions(swapData);
+        displayLnurlPayment();
+    } else {
+        alert('Error creating swap on retry. Please try again.');
     }
 }
 
