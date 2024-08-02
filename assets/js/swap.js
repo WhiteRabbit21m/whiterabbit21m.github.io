@@ -1,195 +1,91 @@
-const BOLTZ_API_URL = 'https://api.boltz.exchange/v2';
-const SERVICE_FEE_PERCENTAGE = 0.005; // 0.5%
-const LNURL_PAY = 'LNURL1DP68GURN8GHJ7V33D5H8G6TSWVHJUAM9D3KZ66MWDAMKUTMVDE6HYMRS9UC8SVFSXSUN2CEJVG6RGVPKVSCRQESUVXT0J';
+const BACKEND_URL = 'http://localhost:3000';
+const WS_URL = 'ws://localhost:3000';
 
-let currentQuote = null;
-let pairData = null;
+let swapWebSocket;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const getQuoteButton = document.getElementById('get-quote');
-    getQuoteButton.addEventListener('click', getQuote);
+  const swapInterface = document.getElementById('swap-interface');
+  swapInterface.innerHTML = `
+    <select id="swap-type">
+      <option value="submarine">Bitcoin to Lightning (Submarine Swap)</option>
+      <option value="reverse">Lightning to Bitcoin (Reverse Swap)</option>
+    </select>
+    <input type="number" id="amount" placeholder="Amount in satoshis">
+    <div id="invoice-input" style="display:none;">
+      <input type="text" id="invoice" placeholder="Lightning Invoice">
+    </div>
+    <button id="create-swap">Create Swap</button>
+  `;
 
-    const payLnurlButton = document.getElementById('pay-lnurl');
-    payLnurlButton.addEventListener('click', payWithLnurl);
+  const swapType = document.getElementById('swap-type');
+  const invoiceInput = document.getElementById('invoice-input');
+  const createSwapButton = document.getElementById('create-swap');
 
-    // Fetch pair data on page load
-    fetchPairData();
+  swapType.addEventListener('change', () => {
+    invoiceInput.style.display = swapType.value === 'submarine' ? 'block' : 'none';
+  });
+
+  createSwapButton.addEventListener('click', createSwap);
 });
 
-async function fetchPairData() {
-    try {
-        const response = await fetch(`${BOLTZ_API_URL}/swap/submarine`);
-        const pairs = await response.json();
-        pairData = pairs['BTC']['BTC'];
-        if (!pairData) {
-            throw new Error('Failed to fetch pair data');
-        }
-        document.getElementById('amount').placeholder = `Amount to swap (min: ${pairData.limits.minimal} sats)`;
-    } catch (error) {
-        console.error('Error fetching pair data:', error);
-        alert('Failed to fetch swap information. Please try again later.');
-    }
-}
+async function createSwap() {
+  const swapType = document.getElementById('swap-type').value;
+  const amount = document.getElementById('amount').value;
+  const invoice = document.getElementById('invoice').value;
 
-async function getQuote() {
-    await fetchPairData(); // Refresh pair data before getting a quote
-    
-    const swapType = document.getElementById('swap-type').value;
-    const amount = parseInt(document.getElementById('amount').value);
+  try {
+    const response = await axios.post(`${BACKEND_URL}/create-swap`, {
+      type: swapType,
+      amount: parseInt(amount),
+      invoice: swapType === 'submarine' ? invoice : undefined,
+    });
 
-    if (!pairData) {
-        alert('Swap information not available. Please refresh the page and try again.');
-        return;
-    }
-
-    if (!amount || isNaN(amount) || amount < pairData.limits.minimal) {
-        alert(`Please enter a valid amount. Minimum amount is ${pairData.limits.minimal} satoshis.`);
-        return;
-    }
-
-    try {
-        const { rate, fees } = pairData;
-        const boltzFee = fees.percentage / 100;
-        const serviceFee = SERVICE_FEE_PERCENTAGE;
-
-        const amountAfterFee = amount * (1 - boltzFee - serviceFee);
-        const estimatedReceiveAmount = Math.floor(amountAfterFee * rate);
-
-        currentQuote = {
-            swapType,
-            amount,
-            estimatedReceiveAmount,
-            serviceFeeAmount: Math.floor(amount * serviceFee),
-            boltzFeeAmount: Math.floor(amount * boltzFee),
-            pairHash: pairData.hash
-        };
-
-        displayQuote(currentQuote);
-    } catch (error) {
-        console.error('Error creating quote:', error);
-        document.getElementById('quote-result').innerHTML = 'Error creating quote. Please try again.';
-    }
-}
-
-function displayQuote(quote) {
-    const quoteResult = document.getElementById('quote-result');
-    quoteResult.innerHTML = `
-        <h2>Swap Quote</h2>
-        <p>Type: ${quote.swapType === 'BTC-LN' ? 'Bitcoin to Lightning' : 'Lightning to Bitcoin'}</p>
-        <p>Amount: ${quote.amount} satoshis</p>
-        <p>Estimated receive amount: ${quote.estimatedReceiveAmount} satoshis</p>
-        <p>Boltz Fee: ${quote.boltzFeeAmount} satoshis</p>
-        <p>Service Fee: ${quote.serviceFeeAmount} satoshis</p>
-        <button id="confirm-swap" class="cta-button">Confirm Swap</button>
-    `;
-
-    document.getElementById('confirm-swap').addEventListener('click', confirmSwap);
-}
-
-async function confirmSwap() {
-    if (!currentQuote) {
-        alert('Please get a quote first.');
-        return;
-    }
-
-    try {
-        await fetchPairData(); // Refresh pair data before confirming swap
-        
-        const preimageHash = await generatePreimageHash();
-        const publicKeyHex = await generatePublicKey();
-
-        const swapEndpoint = currentQuote.swapType === 'BTC-LN' ? 'submarine' : 'reverse';
-        
-        let requestBody = {
-            from: 'BTC',
-            to: 'BTC',
-            [swapEndpoint === 'submarine' ? 'amount' : 'invoiceAmount']: currentQuote.amount,
-            preimageHash: preimageHash,
-            [swapEndpoint === 'submarine' ? 'refundPublicKey' : 'claimPublicKey']: publicKeyHex,
-            pairHash: pairData.hash
-        };
-
-        console.log('Sending request to Boltz API:', requestBody);
-
-        const swapResponse = await fetch(`${BOLTZ_API_URL}/swap/${swapEndpoint}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody),
-        });
-
-        if (!swapResponse.ok) {
-            const errorData = await swapResponse.json();
-            throw new Error(`API error: ${errorData.error || 'Unknown error'}`);
-        }
-
-        const swapData = await swapResponse.json();
-
-        if (swapData.id) {
-            displaySwapInstructions(swapData);
-            displayLnurlPayment();
-        } else {
-            alert('Error creating swap. Please try again.');
-        }
-    } catch (error) {
-        console.error('Error confirming swap:', error);
-        alert(`Error confirming swap: ${error.message}`);
-    }
+    const { swapId } = response.data;
+    displaySwapInstructions(response.data);
+    connectWebSocket(swapId);
+  } catch (error) {
+    console.error('Error creating swap:', error);
+    alert('Failed to create swap. Please try again.');
+  }
 }
 
 function displaySwapInstructions(swapData) {
-    const swapResult = document.getElementById('swap-result');
-    swapResult.innerHTML = `
-        <h2>Swap Instructions</h2>
-        <p>Swap ID: ${swapData.id}</p>
-        ${currentQuote.swapType === 'BTC-LN' 
-            ? `<p>Please send ${currentQuote.amount} satoshis to this Bitcoin address:</p>
-               <p>${swapData.address}</p>`
-            : `<p>Please pay the following Lightning invoice:</p>
-               <p>${swapData.invoice}</p>`
-        }
-        <p>Timeout Block Height: ${swapData.timeoutBlockHeight}</p>
-    `;
+  const swapStatus = document.getElementById('swap-status');
+  swapStatus.innerHTML = `
+    <h2>Swap Created</h2>
+    <p>Swap ID: ${swapData.id}</p>
+    <p>Status: ${swapData.status}</p>
+    ${swapData.address ? `<p>Send funds to: ${swapData.address}</p>` : ''}
+    ${swapData.invoice ? `<p>Pay this invoice: ${swapData.invoice}</p>` : ''}
+  `;
 }
 
-function displayLnurlPayment() {
-    const lnurlQr = document.getElementById('lnurl-qr');
-    lnurlQr.innerHTML = ''; // Clear previous QR code
-    new QRCode(lnurlQr, LNURL_PAY);
-    document.getElementById('lnurl-payment').style.display = 'block';
+function connectWebSocket(swapId) {
+  if (swapWebSocket) {
+    swapWebSocket.close();
+  }
+
+  swapWebSocket = new WebSocket(WS_URL);
+
+  swapWebSocket.onopen = () => {
+    swapWebSocket.send(JSON.stringify({ type: 'subscribe', swapId }));
+  };
+
+  swapWebSocket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (data.swapId === swapId) {
+      updateSwapStatus(data.status);
+    }
+  };
+
+  swapWebSocket.onerror = (error) => {
+    console.error('WebSocket error:', error);
+  };
 }
 
-async function payWithLnurl() {
-    alert('LNURL payment initiated. Please complete the payment in your Lightning wallet.');
-    // In a real implementation, you would need to verify the payment server-side
-    // For now, we'll just simulate a successful payment
-    setTimeout(() => {
-        alert('Payment received! Your swap is now processing.');
-        document.getElementById('lnurl-payment').style.display = 'none';
-    }, 5000);
-}
-
-async function generatePreimageHash() {
-    const preimage = window.crypto.getRandomValues(new Uint8Array(32));
-    const preimageHash = await window.crypto.subtle.digest('SHA-256', preimage);
-    return Array.from(new Uint8Array(preimageHash))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-}
-
-async function generatePublicKey() {
-    // Nota: questa è una semplificazione e non è sicura per l'uso in produzione
-    const keyPair = await window.crypto.subtle.generateKey(
-        {
-            name: 'ECDSA',
-            namedCurve: 'P-256'
-        },
-        true,
-        ['sign', 'verify']
-    );
-    const publicKey = await window.crypto.subtle.exportKey('raw', keyPair.publicKey);
-    return Array.from(new Uint8Array(publicKey))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
+function updateSwapStatus(status) {
+  const statusElement = document.querySelector('#swap-status p:nth-child(3)');
+  if (statusElement) {
+    statusElement.textContent = `Status: ${status}`;
+  }
 }
