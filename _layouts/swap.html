@@ -1,0 +1,20 @@
+---
+layout: default
+---
+
+<div class="swap-container">
+  <h1>{{ page.title }}</h1>
+  
+  {{ content }}
+  
+  <div id="fee-info">
+    <p>Our service fee: <span id="service-fee">0.5%</span></p>
+  </div>
+  
+  <div id="lnurl-payment">
+    <h2>Pay service fee</h2>
+    <div id="lnurl-qr"></div>
+    <p>Scan the QR code or click the button below to pay the service fee:</p>
+    <button id="pay-lnurl">Pay with Lightning</button>
+  </div>
+</div>
