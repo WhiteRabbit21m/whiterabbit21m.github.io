@@ -1,0 +1,72 @@
+.swap-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+}
+
+#swap-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  select, input, button {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+#quote-result, #swap-result {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+#fee-info {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#lnurl-payment {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+
+  #lnurl-qr {
+    margin-bottom: 10px;
+  }
+
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+}
