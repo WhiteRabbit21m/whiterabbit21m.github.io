@@ -1,7 +1,3 @@
-// Importazioni necessarie
-import { ECPairFactory } from 'ecpair';
-import * as ecc from 'tiny-secp256k1';
-
 const BOLTZ_API_URL = 'https://api.boltz.exchange/v2';
 const SERVICE_FEE_PERCENTAGE = 0.005; // 0.5%
 const LNURL_PAY = 'LNURL1DP68GURN8GHJ7V33D5H8G6TSWVHJUAM9D3KZ66MWDAMKUTMVDE6HYMRS9UC8SVFSXSUN2CEJVG6RGVPKVSCRQESUVXT0J';
@@ -183,7 +179,17 @@ async function generatePreimageHash() {
 }
 
 async function generatePublicKey() {
-    const ECPair = ECPairFactory(ecc);
-    const keyPair = ECPair.makeRandom();
-    return keyPair.publicKey.toString('hex');
+    // Nota: questa è una semplificazione e non è sicura per l'uso in produzione
+    const keyPair = await window.crypto.subtle.generateKey(
+        {
+            name: 'ECDSA',
+            namedCurve: 'P-256'
+        },
+        true,
+        ['sign', 'verify']
+    );
+    const publicKey = await window.crypto.subtle.exportKey('raw', keyPair.publicKey);
+    return Array.from(new Uint8Array(publicKey))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
 }
