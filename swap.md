@@ -25,7 +25,12 @@ Use this service to swap your Lightning Network funds to on-chain Bitcoin.
   <div id="swap-result" style="display:none;">
     <h2>Swap Details</h2>
     <p>Amount: <span id="result-amount"></span> sats</p>
-    <p>Payment Request: <span id="result-payment-request"></span></p>
+    <div class="invoice-container">
+      <h3>Lightning Invoice</h3>
+      <div id="qr-code"></div>
+      <p>Payment Request: <span id="result-payment-request"></span></p>
+      <button id="copy-invoice" class="copy-btn">Copy Invoice</button>
+    </div>
     <p>On-chain Address: <span id="result-address"></span></p>
     <p>Status: <span id="result-status"></span></p>
     <button id="check-status" class="submit-btn">Check Status</button>
