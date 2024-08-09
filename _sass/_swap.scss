@@ -1,56 +1,105 @@
-.swap-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+
+// Variabili colore (assicurati che queste corrispondano a quelle della tua homepage)
+$home-bg-color: #121212;
+$text-color-light: #ffffff;
+$accent-color: #4CAF50;
+$card-bg-color: #1E1E1E;
+
+.swap-page {
+  background-color: $home-bg-color;
+  color: $text-color-light;
+  padding: 60px 0;
   
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
   
-  #swap-form {
-    display: flex;
-    flex-direction: column;
-    
-    label {
-      margin-top: 10px;
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    h1 {
+      font-size: 2.5em;
+      color: $text-color-light;
     }
-    
-    input {
-      padding: 5px;
-      margin-bottom: 10px;
+  }
+  
+  .swap-content {
+    text-align: center;
+    margin-bottom: 40px;
+    color: rgba($text-color-light, 0.9);
+  }
+
+  .swap-form-container {
+    background-color: $card-bg-color;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+
+  #swap-form, #swap-result {
+    h2 {
+      color: $text-color-light;
+      margin-bottom: 20px;
     }
-    
-    button {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      
-      &:hover {
-        background-color: #0056b3;
+    .form-group {
+      margin-bottom: 20px;
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: rgba($text-color-light, 0.7);
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        background-color: darken($card-bg-color, 5%);
+        border: 1px solid rgba($text-color-light, 0.1);
+        color: $text-color-light;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+        &:focus {
+          outline: none;
+          border-color: $accent-color;
+        }
       }
     }
   }
-  
-  #swap-result {
-    margin-top: 30px;
-    border: 1px solid #ddd;
-    padding: 20px;
+
+  .submit-btn {
+    background-color: $accent-color;
+    color: $text-color-light;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    
-    h2 {
-      margin-top: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    &:hover {
+      background-color: darken($accent-color, 10%);
     }
   }
-  
-  #error-message {
+
+  .error-message {
     margin-top: 20px;
     padding: 10px;
-    background-color: #ffeeee;
-    border: 1px solid #ffcccc;
-    border-radius: 5px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: #ff6b6b;
+    border-radius: 4px;
+  }
+}
+
+// Media query per la responsività
+@media screen and (max-width: 768px) {
+  .swap-page {
+    padding: 40px 0;
+    .page-header h1 {
+      font-size: 2em;
+    }
+    .swap-form-container {
+      padding: 20px;
+    }
   }
 }
