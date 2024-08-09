@@ -46,10 +46,12 @@ $card-bg-color: #1E1E1E;
     }
     .form-group {
       margin-bottom: 20px;
+      text-align: left;  // Allinea il testo a sinistra
       label {
         display: block;
         margin-bottom: 5px;
         color: rgba($text-color-light, 0.7);
+        text-align: left;  // Assicura che l'etichetta sia allineata a sinistra
       }
       input {
         width: 100%;
@@ -91,6 +93,7 @@ $card-bg-color: #1E1E1E;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
+    width: 100%;  // Allarga il pulsante alla larghezza del container
     &:hover {
       background-color: darken($accent-color, 10%);
     }
