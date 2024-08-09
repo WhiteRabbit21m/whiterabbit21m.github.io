@@ -1,6 +1,6 @@
 ---
 layout: swap
-title: Lightning to On-chain Swap
+title: Swap
 permalink: /swap/
 ---
 
