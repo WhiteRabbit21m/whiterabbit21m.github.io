@@ -3,6 +3,7 @@ $home-bg-color: #121212;
 $text-color-light: #ffffff;
 $accent-color: #4CAF50;
 $card-bg-color: #1E1E1E;
+$error-color: #ff6b6b;
 
 .swap-page {
   background-color: $home-bg-color;
@@ -68,21 +69,24 @@ $card-bg-color: #1E1E1E;
         &::placeholder {
           color: rgba($text-color-light, 0.3);
         }
-
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
         }
-
         &[type=number] {
           -moz-appearance: textfield;
         }
       }
     }
+    .input-info {
+      font-size: 0.9em;
+      color: rgba($text-color-light, 0.6);
+      margin-top: 5px;
+    }
   }
 
-  .submit-btn {
+  .submit-btn, #create-swap, #check-status {
     background-color: $accent-color;
     color: $text-color-light;
     padding: 10px 20px;
@@ -100,25 +104,29 @@ $card-bg-color: #1E1E1E;
   .error-message {
     margin-top: 20px;
     padding: 10px;
-    background-color: rgba(255, 0, 0, 0.1);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    color: #ff6b6b;
+    background-color: rgba($error-color, 0.1);
+    border: 1px solid rgba($error-color, 0.3);
+    color: $error-color;
     border-radius: 4px;
   }
 
-  .invoice-container {
-    margin-top: 20px;
-    text-align: center;
-
-    #qr-code {
+  #swap-result {
+    .qr-code-container {
+      text-align: center;
       margin: 20px 0;
       img {
         max-width: 200px;
         height: auto;
       }
     }
-
-    .copy-btn {
+    .payment-request-container {
+      background-color: darken($card-bg-color, 5%);
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      word-break: break-all;
+    }
+    #copy-invoice {
       background-color: $accent-color;
       color: $text-color-light;
       padding: 5px 10px;
@@ -127,7 +135,6 @@ $card-bg-color: #1E1E1E;
       cursor: pointer;
       font-size: 0.9em;
       margin-top: 10px;
-
       &:hover {
         background-color: darken($accent-color, 10%);
       }
