@@ -1,16 +1,50 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightning to On-chain Swap</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Lightning to On-chain Swap</h1>
+        
+        <div id="swap-form">
+            <h2>Create Swap</h2>
+            <div class="form-group">
+                <label for="amount">Amount (sats):</label>
+                <input type="number" id="amount" required min="10000" max="1000000">
+                <p class="input-info">Min: <span id="min-amount">10,000</span> sats, Max: <span id="max-amount">1,000,000</span> sats</p>
+            </div>
+            <div class="form-group">
+                <label for="address">Bitcoin Address:</label>
+                <input type="text" id="address" required placeholder="Enter a valid Bitcoin address">
+            </div>
+            <p>Service Fee: <span id="service-fee">2.5</span>%</p>
+            <button id="create-swap">Create Swap</button>
+        </div>
 
-<div class="swap-page">
-  <div class="container">
-    <header class="page-header">
-      <h1>{{ page.title }}</h1>
-    </header>
-    <div class="swap-content">
-      {{ content }}
+        <div id="swap-result" style="display:none;">
+            <h2>Swap Details</h2>
+            <p>Amount: <span id="result-amount"></span> sats</p>
+            <div class="qr-code-container">
+                <div id="qr-code"></div>
+            </div>
+            <p>Payment Request:</p>
+            <div class="payment-request-container">
+                <span id="result-payment-request"></span>
+                <button id="copy-invoice">Copy Invoice</button>
+            </div>
+            <p>On-chain Address: <span id="result-address"></span></p>
+            <p>Status: <span id="result-status"></span></p>
+            <button id="check-status">Check Status</button>
+        </div>
+
+        <div id="error-message" class="error-message" style="display:none;"></div>
     </div>
-  </div>
-</div>
 
-<script src="{{ '/assets/js/swap.js' | relative_url }}"></script>
+    <script src="swap.js"></script>
+</body>
+</html>
