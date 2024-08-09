@@ -33,13 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
       swapId = data.swap_id;
 
       document.getElementById('result-amount').textContent = data.amount_sat;
-      document.getElementById('result-payment-request').textContent = data.payment_request;
+      
+      // Aggiorna la visualizzazione dell'invoice
+      const paymentRequestElement = document.getElementById('result-payment-request');
+      paymentRequestElement.textContent = data.payment_request;
+      
+      // Genera e mostra il QR code
+      const qr = qrcode(0, 'M');
+      qr.addData(data.payment_request);
+      qr.make();
+      const qrCodeElement = document.getElementById('qr-code');
+      qrCodeElement.innerHTML = qr.createImgTag(5);
+
       document.getElementById('result-address').textContent = data.onchain_address;
       document.getElementById('result-status').textContent = 'Pending';
 
       swapForm.style.display = 'none';
       swapResult.style.display = 'block';
       errorMessage.style.display = 'none';
+
+      // Aggiungi funzionalità di copia
+      const copyButton = document.getElementById('copy-invoice');
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(data.payment_request).then(() => {
+          copyButton.textContent = 'Copied!';
+          setTimeout(() => {
+            copyButton.textContent = 'Copy Invoice';
+          }, 2000);
+        });
+      });
+
     } catch (error) {
       showError(error.message);
     }
