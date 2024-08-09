@@ -41,8 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       swapResult.style.display = 'block';
       errorMessage.style.display = 'none';
     } catch (error) {
-      errorMessage.textContent = error.message;
-      errorMessage.style.display = 'block';
+      showError(error.message);
     }
   }
 
@@ -67,8 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       errorMessage.style.display = 'none';
     } catch (error) {
-      errorMessage.textContent = error.message;
-      errorMessage.style.display = 'block';
+      showError(error.message);
     }
+  }
+
+  function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
   }
 });
